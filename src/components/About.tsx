@@ -34,7 +34,7 @@ const About = () => {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80"
+                  src="./aboutMe.jpg"
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />

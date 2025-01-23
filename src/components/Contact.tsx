@@ -15,14 +15,14 @@ const Contact = () => {
           </p>
           <div className="flex justify-center space-x-6">
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:kumar.priyanshu.official@gmail.com"
               className="flex items-center px-6 py-3 bg-purple hover:bg-purple-light text-white font-semibold rounded-lg transition-colors"
             >
               <Mail className="mr-2" size={20} />
               Email Me
             </a>
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/priyanshukumar0309"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center px-6 py-3 bg-navy-light hover:bg-navy text-white font-semibold rounded-lg transition-colors"
@@ -31,7 +31,7 @@ const Contact = () => {
               GitHub
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/kpriyans"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center px-6 py-3 bg-navy-light hover:bg-navy text-white font-semibold rounded-lg transition-colors"

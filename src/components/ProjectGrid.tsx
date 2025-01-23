@@ -6,7 +6,6 @@ interface Project {
   image: string;
   technologies: string[];
   liveUrl: string;
-  githubUrl: string;
   icon: JSX.Element;
 }
 
@@ -17,7 +16,6 @@ const projects: Project[] = [
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
     technologies: ["Python", "TensorFlow", "React", "AWS"],
     liveUrl: "https://project1.vercel.app",
-    githubUrl: "https://github.com/yourusername/project1",
     icon: <Gauge className="text-purple-light" size={24} />,
   },
   {
@@ -26,25 +24,22 @@ const projects: Project[] = [
     image: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=800&q=80",
     technologies: ["Node.js", "Stripe API", "React", "MongoDB"],
     liveUrl: "https://project2.vercel.app",
-    githubUrl: "https://github.com/yourusername/project2",
     icon: <CreditCard className="text-purple-light" size={24} />,
   },
   {
-    title: "Vehicle Fleet Management",
-    description: "Real-time fleet tracking and management system with integrated financial reporting and maintenance scheduling.",
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80",
+    title: "Autmobile LoanHub",
+    description: "Car LoanHub is a platform that simplifies car financing by helping you compare and choose the best leasing and loan options",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
     technologies: ["React Native", "Node.js", "PostgreSQL"],
-    liveUrl: "https://project3.vercel.app",
-    githubUrl: "https://github.com/yourusername/project3",
+    liveUrl: "https://loanhub.kumarpriyanshu.in/",
     icon: <Car className="text-purple-light" size={24} />,
   },
   {
-    title: "Auto Loan Optimizer",
-    description: "Machine learning-based loan approval and optimization system for automotive financing institutions.",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+    title: "Car Manager",
+    description: "Machine learning-based optimization system for automotive management.",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80",
     technologies: ["Python", "scikit-learn", "FastAPI", "React"],
     liveUrl: "https://project4.vercel.app",
-    githubUrl: "https://github.com/yourusername/project4",
     icon: <Banknote className="text-purple-light" size={24} />,
   },
 ];
@@ -92,15 +87,7 @@ const ProjectGrid = () => {
                   <ExternalLink size={20} className="mr-2" />
                   Live Demo
                 </a>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-white hover:text-purple-light transition-colors"
-                >
-                  <Github size={20} className="mr-2" />
-                  Code
-                </a>
+                
               </div>
             </div>
           ))}
