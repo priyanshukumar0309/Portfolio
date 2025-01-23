@@ -1,3 +1,5 @@
+import { Briefcase, Car, LineChart } from "lucide-react";
+
 const About = () => {
   return (
     <section id="about" className="py-20 bg-navy-light">
@@ -5,19 +7,24 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
             <h2 className="text-3xl font-bold text-white mb-6">About Me</h2>
-            <div className="space-y-4 text-gray-300">
-              <p>
-                Hello! I'm a passionate full-stack developer with a love for creating beautiful,
-                functional, and user-friendly applications. My journey in tech started with...
+            <div className="space-y-6 text-gray-300">
+              <p className="flex items-center gap-2">
+                <Briefcase className="text-purple-light flex-shrink-0" size={20} />
+                Product Manager with expertise in fintech and automotive technologies
               </p>
-              <p>
-                I specialize in building modern web applications using cutting-edge technologies.
-                When I'm not coding, you can find me exploring new technologies, contributing to
-                open-source projects, or sharing my knowledge with the developer community.
+              <p className="flex items-center gap-2">
+                <Car className="text-purple-light flex-shrink-0" size={20} />
+                Passionate about revolutionizing mobility solutions through innovative financial technology
               </p>
-              <p>
-                Currently, I'm focused on building accessible, human-centered products that make
-                a real difference in people's lives.
+              <p className="flex items-center gap-2">
+                <LineChart className="text-purple-light flex-shrink-0" size={20} />
+                Experienced in leading cross-functional teams to deliver data-driven solutions
+              </p>
+              <p className="mt-6">
+                I specialize in bridging the gap between automotive innovation and financial technology,
+                creating solutions that make vehicle ownership and mobility more accessible and efficient.
+                My experience spans from developing vehicle financing platforms to implementing
+                fleet management solutions.
               </p>
             </div>
           </div>
@@ -25,7 +32,7 @@ const About = () => {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
+                  src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80"
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />

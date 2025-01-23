@@ -1,4 +1,4 @@
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Car, CreditCard, Gauge, Banknote } from "lucide-react";
 
 interface Project {
   title: string;
@@ -7,24 +7,45 @@ interface Project {
   technologies: string[];
   liveUrl: string;
   githubUrl: string;
+  icon: JSX.Element;
 }
 
 const projects: Project[] = [
   {
-    title: "Project 1",
-    description: "A brief description of your amazing project goes here. Explain what problem it solves.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
-    technologies: ["React", "Node.js", "MongoDB"],
+    title: "FinDrive Analytics",
+    description: "An AI-powered platform analyzing vehicle financing patterns and predicting market trends for automotive lenders.",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+    technologies: ["Python", "TensorFlow", "React", "AWS"],
     liveUrl: "https://project1.vercel.app",
     githubUrl: "https://github.com/yourusername/project1",
+    icon: <Gauge className="text-purple-light" size={24} />,
   },
   {
-    title: "Project 2",
-    description: "Another awesome project description. Highlight the key features and technologies used.",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80",
-    technologies: ["Next.js", "TypeScript", "Tailwind"],
+    title: "AutoPay Gateway",
+    description: "A secure payment processing system specifically designed for automotive dealerships and service centers.",
+    image: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=800&q=80",
+    technologies: ["Node.js", "Stripe API", "React", "MongoDB"],
     liveUrl: "https://project2.vercel.app",
     githubUrl: "https://github.com/yourusername/project2",
+    icon: <CreditCard className="text-purple-light" size={24} />,
+  },
+  {
+    title: "Vehicle Fleet Management",
+    description: "Real-time fleet tracking and management system with integrated financial reporting and maintenance scheduling.",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80",
+    technologies: ["React Native", "Node.js", "PostgreSQL"],
+    liveUrl: "https://project3.vercel.app",
+    githubUrl: "https://github.com/yourusername/project3",
+    icon: <Car className="text-purple-light" size={24} />,
+  },
+  {
+    title: "Auto Loan Optimizer",
+    description: "Machine learning-based loan approval and optimization system for automotive financing institutions.",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+    technologies: ["Python", "scikit-learn", "FastAPI", "React"],
+    liveUrl: "https://project4.vercel.app",
+    githubUrl: "https://github.com/yourusername/project4",
+    icon: <Banknote className="text-purple-light" size={24} />,
   },
 ];
 
@@ -39,6 +60,10 @@ const ProjectGrid = () => {
               key={index}
               className="bg-navy p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300"
             >
+              <div className="flex items-center mb-4">
+                {project.icon}
+                <h3 className="text-xl font-semibold text-white ml-2">{project.title}</h3>
+              </div>
               <div className="relative aspect-video mb-4 overflow-hidden rounded-lg">
                 <img
                   src={project.image}
@@ -46,7 +71,6 @@ const ProjectGrid = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
               <p className="text-gray-300 mb-4">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.technologies.map((tech, techIndex) => (
