@@ -1,25 +1,47 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Link as ScrollLink, scroller } from "react-scroll";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" },
-    { name: "About", href: "/#about" },
-    { name: "Skills", href: "/#skills" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Home", href: "/", isScroll: false },
+    { name: "About", href: "about", isScroll: true },
+    { name: "Skills", href: "skills", isScroll: true },
+    { name: "Contact", href: "contact", isScroll: true },
+    { name: "Projects", href: "/projects", isScroll: false },
+    { name: "Blog", href: "/blog", isScroll: false },
   ];
 
-  const isActive = (href: string) => {
-    if (href.startsWith("/#")) {
-      return location.pathname === "/" && location.hash === href.substring(1);
+  const handleNavClick = (href: string, isScroll: boolean) => {
+    if (isScroll) {
+      if (location.pathname === "/") {
+        // Scroll directly if already on the home page
+        scroller.scrollTo(href, {
+          smooth: true,
+          duration: 500,
+          offset: -70, // Adjust based on your navbar height
+        });
+      } else {
+        // Navigate to home and scroll after navigation
+        navigate("/");
+        setTimeout(() => {
+          scroller.scrollTo(href, {
+            smooth: true,
+            duration: 500,
+            offset: -70,
+          });
+        }, 300); // Ensure the navigation is complete
+      }
+    } else {
+      // Navigate normally for non-scroll links
+      navigate(href);
     }
-    return location.pathname === href;
+    setIsOpen(false);
   };
 
   return (
@@ -27,27 +49,36 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link to="/" className="text-white font-bold text-xl">Portfolio</Link>
+            <ScrollLink
+              to="/"
+              smooth
+              className="text-white font-bold text-xl cursor-pointer"
+              onClick={() => navigate("/")}
+            >
+              Kumar Priyanshu
+            </ScrollLink>
           </div>
-          
+
+          {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.name}
-                  to={item.href}
+                  onClick={() => handleNavClick(item.href, item.isScroll)}
                   className={`${
-                    isActive(item.href)
+                    location.pathname === item.href
                       ? "text-purple-light"
                       : "text-gray-300 hover:text-white"
                   } px-3 py-2 rounded-md text-sm font-medium transition-colors`}
                 >
                   {item.name}
-                </Link>
+                </button>
               ))}
             </div>
           </div>
-          
+
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -59,22 +90,22 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-navy">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                to={item.href}
+                onClick={() => handleNavClick(item.href, item.isScroll)}
                 className={`${
-                  isActive(item.href)
+                  location.pathname === item.href
                     ? "text-purple-light"
                     : "text-gray-300 hover:text-white"
                 } block px-3 py-2 rounded-md text-base font-medium`}
-                onClick={() => setIsOpen(false)}
               >
                 {item.name}
-              </Link>
+              </button>
             ))}
           </div>
         </div>

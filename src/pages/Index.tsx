@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
+import ProjectGrid from "@/components/ProjectGrid";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <About />
       <Skills />
       <Contact />
+      <ProjectGrid />
     </div>
   );
 };

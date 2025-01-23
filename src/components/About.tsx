@@ -1,7 +1,9 @@
 import { Briefcase, Car, LineChart } from "lucide-react";
+import { Element } from "react-scroll";
 
 const About = () => {
   return (
+    <Element name="about">
     <section id="about" className="py-20 bg-navy-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -43,6 +45,7 @@ const About = () => {
         </div>
       </div>
     </section>
+    </Element>
   );
 };
 
