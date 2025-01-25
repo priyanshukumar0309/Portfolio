@@ -3,26 +3,13 @@ import { ArrowRight } from "lucide-react";
 
 const blogPosts = [
   {
-    title: "The Future of Automotive Financing",
-    excerpt: "Exploring how blockchain and AI are revolutionizing vehicle financing...",
-    date: "2024-03-15",
-    readTime: "5 min read",
-    category: "Fintech",
-  },
-  {
-    title: "Connected Cars: A Product Manager's Perspective",
-    excerpt: "Insights into managing connected vehicle platforms and their impact...",
-    date: "2024-03-10",
-    readTime: "7 min read",
-    category: "Automotive",
-  },
-  {
-    title: "Building Better Fleet Management Solutions",
-    excerpt: "Key considerations when developing fleet management platforms...",
-    date: "2024-03-05",
-    readTime: "6 min read",
-    category: "Product Management",
-  },
+    title: "Measurement",
+    excerpt: "ICSE curriculum is quite rigorous in academics...",
+    date: "2022-03-15",
+    readTime: "2 min read",
+    category: "Science and Philosophy",
+    link:'https://www.linkedin.com/posts/kpriyanshu_icse-curriculum-is-quite-rigorous-in-academics-activity-6915290630717898752-SoLQ'
+  }
 ];
 
 const Blog = () => {
@@ -50,7 +37,10 @@ const Blog = () => {
                 <p className="text-gray-300 mb-4">{post.excerpt}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400 text-sm">{post.readTime}</span>
-                  <button className="text-purple-light hover:text-purple transition-colors flex items-center gap-2">
+                  <button
+                    onClick={() => window.open(post.link, "_blank", "noopener,noreferrer")} // Replace 'post.link' with the actual URL or dynamic value
+                    className="text-purple-light hover:text-purple transition-colors flex items-center gap-2"
+                  >
                     Read More <ArrowRight size={16} />
                   </button>
                 </div>

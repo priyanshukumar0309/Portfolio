@@ -3,17 +3,31 @@ import { Element } from "react-scroll";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-navy pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      className="min-h-screen flex items-center justify-center bg-navy pt-16 relative"
+      style={{
+        backgroundImage: "url('/hero.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-85"></div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-purple-light text-lg mb-4 animate-fade-in">Product Manager</p>
-          <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 animate-fade-in">
-             Fintech & Automotive <span className="text-purple-light">Innovations</span>
-          </h1>
-          <p className="text-xl sm:text-2xl text-gray-300 mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <h1 className="text-purple-light text-4xl mb-4 animate-fade-in">Product Manager</h1>
+          <h2 className="text-2xl sm:text-6xl font-bold text-white mb-6 animate-fade-in">
+            Fintech & Automotive <span className="text-green-400">Innovations</span>
+          </h2>
+          <p
+            className="text-xl sm:text-2xl text-gray-300 mb-8 animate-fade-in"
+            style={{ animationDelay: "0.2s" }}
+          >
             Bridging the gap between technology and mobility solutions
           </p>
-          <div className="flex justify-center space-x-4 mb-12 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+          <div
+            className="flex justify-center space-x-4 mb-12 animate-fade-in"
+            style={{ animationDelay: "0.4s" }}
+          >
             <a
               href="https://github.com/priyanshukumar0309"
               target="_blank"

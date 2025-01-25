@@ -10,7 +10,7 @@ interface Project {
 }
 
 const projects: Project[] = [
-  {
+ /* {
     title: "FinDrive Analytics",
     description: "An AI-powered platform analyzing vehicle financing patterns and predicting market trends for automotive lenders.",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
@@ -25,7 +25,7 @@ const projects: Project[] = [
     technologies: ["Node.js", "Stripe API", "React", "MongoDB"],
     liveUrl: "https://project2.vercel.app",
     icon: <CreditCard className="text-purple-light" size={24} />,
-  },
+  },*/
   {
     title: "Autmobile LoanHub",
     description: "Car LoanHub is a platform that simplifies car financing by helping you compare and choose the best leasing and loan options",
@@ -34,14 +34,14 @@ const projects: Project[] = [
     liveUrl: "https://loanhub.kumarpriyanshu.in/",
     icon: <Car className="text-purple-light" size={24} />,
   },
-  {
+  /*{
     title: "Car Manager",
     description: "Machine learning-based optimization system for automotive management.",
     image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80",
     technologies: ["Python", "scikit-learn", "FastAPI", "React"],
     liveUrl: "https://project4.vercel.app",
     icon: <Banknote className="text-purple-light" size={24} />,
-  },
+  },*/
 ];
 
 const ProjectGrid = () => {
