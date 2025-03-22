@@ -1,69 +1,98 @@
-# Welcome to your Lovable project
 
-## Project info
+# Kumar Priyanshu | Product Manager Portfolio
 
-**URL**: https://lovable.dev/projects/4ac1b72b-eb81-4b13-8367-5000ade656c5
+![Portfolio Preview](public/og-image.png)
 
-## How can I edit this code?
+## 🚀 Overview
 
-There are several ways of editing your application.
+A modern portfolio website showcasing my expertise as a Product Manager in the fintech and automotive industries. The site features a sleek dark theme with purple accents, responsive design, and smooth animations.
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4ac1b72b-eb81-4b13-8367-5000ade656c5) and start prompting.
+- **Responsive Design**: Optimized for mobile, tablet, and desktop devices
+- **Modern UI**: Dark theme with purple and green accents for a professional yet contemporary look
+- **Interactive Sections**: Dynamic components with smooth transitions and animations
+- **Multi-page Layout**: Dedicated pages for Projects and Blog content
+- **React + TypeScript**: Built with modern web technologies for performance and type safety
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Technologies Used
 
-**Use your preferred IDE**
+- **Frontend Framework**: React 18 with TypeScript
+- **Styling**: Tailwind CSS for utility-first styling
+- **UI Components**: Shadcn UI component library
+- **Routing**: React Router for seamless navigation
+- **Animation**: Custom CSS animations and transitions
+- **Icons**: Lucide React for modern, consistent iconography
+- **Data Visualization**: Recharts for presenting data
+- **Build Tool**: Vite for fast development and optimized production builds
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📱 Pages
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Home**: Overview with hero section, about me, skills, and contact form
+- **Projects**: Showcase of fintech and automotive product management work
+- **Blog**: Thoughts and insights on product management, fintech, and automotive innovation
 
-Follow these steps:
+## 🖥️ Development
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Prerequisites
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- Node.js 16+
+- npm or yarn
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Getting Started
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+# Clone the repository
+git clone <repository-url>
+
+# Navigate to the project directory
+cd portfolio-website
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Building for Production
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Build the application
+npm run build
 
-**Use GitHub Codespaces**
+# Preview the production build
+npm run preview
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📚 Project Structure
 
-## What technologies are used for this project?
+```
+portfolio-website/
+├── public/              # Static assets
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utility functions and constants
+│   ├── pages/           # Page components
+│   └── App.tsx          # Main application component
+├── tailwind.config.ts   # Tailwind CSS configuration
+└── vite.config.ts       # Vite configuration
+```
 
-This project is built with .
+## 🔄 Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The site is ready to be deployed on platforms like Netlify, Vercel, or GitHub Pages. For deployment instructions, visit the [Lovable documentation](https://docs.lovable.dev/tips-tricks/custom-domain/).
 
-## How can I deploy this project?
+## 📧 Contact
 
-Simply open [Lovable](https://lovable.dev/projects/4ac1b72b-eb81-4b13-8367-5000ade656c5) and click on Share -> Publish.
+- LinkedIn: [kpriyanshu](https://linkedin.com/in/kpriyanshu)
+- GitHub: [priyanshukumar0309](https://github.com/priyanshukumar0309)
 
-## I want to use a custom domain - is that possible?
+## 🙏 Acknowledgements
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+Built with [Lovable](https://lovable.dev) - an AI-powered web development platform.
+
+## 📄 License
+
+MIT © Kumar Priyanshu
