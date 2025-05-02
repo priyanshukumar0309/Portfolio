@@ -42,7 +42,7 @@ const About = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute inset-0 bg-purple/20 rounded-2xl"></div>
+                <div className="absolute inset-0 rounded-2xl"></div>
               </div>
             </div>
           </div>
