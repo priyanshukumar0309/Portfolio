@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin, Calendar } from "lucide-react";
 import { Element } from "react-scroll";
 
 const Contact = () => {
@@ -13,19 +13,28 @@ const Contact = () => {
             I'm currently open to new opportunities and collaborations. Whether you have a question
             or just want to say hi, feel free to reach out!
           </p>
-          <div className="flex justify-center space-x-6">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
             <a
               href="mailto:kumar.priyanshu.official@gmail.com"
-              className="flex items-center px-6 py-3 bg-purple hover:bg-purple-light text-white font-semibold rounded-lg transition-colors"
+              className="flex items-center px-4 sm:px-6 py-3 bg-purple hover:bg-purple-light text-white font-semibold rounded-lg transition-colors w-full sm:w-auto justify-center"
             >
               <Mail className="mr-2" size={20} />
               Email Me
             </a>
             <a
+              href="https://calendar.app.google/Cj7ZFp33coEQR8zv5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center px-4 sm:px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors w-full sm:w-auto justify-center"
+            >
+              <Calendar className="mr-2" size={20} />
+              Schedule Meeting
+            </a>
+            <a
               href="https://github.com/priyanshukumar0309"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center px-6 py-3 bg-navy-light hover:bg-navy text-white font-semibold rounded-lg transition-colors"
+              className="flex items-center px-4 sm:px-6 py-3 bg-navy-light hover:bg-navy text-white font-semibold rounded-lg transition-colors w-full sm:w-auto justify-center"
             >
               <Github className="mr-2" size={20} />
               GitHub
@@ -34,7 +43,7 @@ const Contact = () => {
               href="https://linkedin.com/in/kpriyans"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center px-6 py-3 bg-navy-light hover:bg-navy text-white font-semibold rounded-lg transition-colors"
+              className="flex items-center px-4 sm:px-6 py-3 bg-navy-light hover:bg-navy text-white font-semibold rounded-lg transition-colors w-full sm:w-auto justify-center"
             >
               <Linkedin className="mr-2" size={20} />
               LinkedIn

@@ -35,11 +35,14 @@ const About = () => {
             {/* Right Column */}
             <div className="order-1 md:order-2">
               <div className="relative">
-                <div className="aspect-square rounded-2xl overflow-hidden">
+                <div className="rounded-bl-3xl rounded-tr-3xl overflow-hidden">
                   <img
                     src="./aboutMe.png"
                     alt="Profile"
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-cover rounded-2xl"
+                    style={{ 
+                      backgroundColor: 'transparent'
+                    }}
                   />
                 </div>
                 <div className="absolute inset-0 rounded-2xl"></div>
@@ -112,7 +115,7 @@ const About = () => {
                 <Landmark className="text-purple-light flex-shrink-0" size={40} />
                 <div className="flex justify-between w-full">
                   <div>
-                    <h3 className="text-2xl font-medium text-white">ICICI Bank - PM</h3>
+                    <h3 className="text-2xl font-medium text-white">ICICI Bank - Product Manager</h3>
                     <ul className="list-disc list-inside text-gray-400 mt-2">
                     <h4 className="text-m font-medium text-gray-300">Fresh College Gradutate to work as Analyst and implementor of solutions</h4>  
 
