@@ -1,0 +1,7 @@
+flowchart TD
+  userToggle[UserToggleOnHome] --> indexMode[IndexModeState]
+  indexMode --> standardView[StandardPlatformView]
+  indexMode --> spaceView[SpaceExplorerView]
+  sharedData[SharedPortfolioData] --> standardView
+  sharedData --> spaceMapper[SpaceNodeMapper]
+  spaceMapper --> detailSidebar[DetailSidebar]

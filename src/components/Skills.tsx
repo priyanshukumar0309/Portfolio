@@ -1,25 +1,7 @@
 import { Element } from "react-scroll";
+import { skillCategories } from "@/data/portfolioContent";
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "Product Management",
-      skills: ["Agile/Scrum", "Product Strategy", "User Research", "Data Analytics", "Roadmapping"],
-    },
-    {
-      title: "Fintech",
-      skills: ["Payment Systems", "Financial Analysis", "Risk Management", "Banking APIs", "Blockchain"],
-    },
-    {
-      title: "Automotive",
-      skills: ["Fleet Management", "Telematics", "Vehicle Diagnostics", "Connected Car", "EV Technology"],
-    },
-    {
-      title: "Technical",
-      skills: ["SQL", "Python", "API Integration", "Data Visualization", "Cloud Platforms"],
-    },
-  ];
-
   return (
     <Element name="skills">
     <section id="skills" className="py-20 bg-navy">

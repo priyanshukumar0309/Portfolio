@@ -1,5 +1,6 @@
 import { Briefcase, Car, LineChart, Calendar, GraduationCap, Landmark,CreditCard } from "lucide-react";
 import { Element } from "react-scroll";
+import { aboutContent, journeyItems } from "@/data/portfolioContent";
 
 const About = () => {
   return (
@@ -13,21 +14,18 @@ const About = () => {
               <div className="space-y-6 text-gray-300">
                 <p className="flex items-center gap-2">
                   <Briefcase className="text-purple-light flex-shrink-0" size={20} />
-                  Product Manager with expertise in fintech and automotive technologies
+                  {aboutContent.bullets[0]}
                 </p>
                 <p className="flex items-center gap-2">
                   <Car className="text-purple-light flex-shrink-0" size={20} />
-                  Passionate about revolutionizing mobility solutions through innovative financial technology
+                  {aboutContent.bullets[1]}
                 </p>
                 <p className="flex items-center gap-2">
                   <LineChart className="text-purple-light flex-shrink-0" size={20} />
-                  Experienced in leading cross-functional teams to deliver data-driven solutions
+                  {aboutContent.bullets[2]}
                 </p>
                 <p className="mt-6">
-                  I specialize in bridging the gap between automotive innovation and financial technology,
-                  creating solutions that make vehicle ownership and mobility more accessible and efficient.
-                  My experience spans from developing vehicle financing platforms to implementing
-                  fleet management solutions.
+                  {aboutContent.summary}
                 </p>
               </div>
             </div>
@@ -65,15 +63,15 @@ const About = () => {
                 <Car className="text-purple-light flex-shrink-0" size={40} />
                 <div className="flex justify-between w-full">
                   <div>
-                    <h3 className="text-2xl font-medium text-white">Volvo Cars - Product Manager</h3>
+                    <h3 className="text-2xl font-medium text-white">{journeyItems[0].company} - {journeyItems[0].role}</h3>
                     
                     <ul className="list-disc list-inside text-gray-400 mt-2">
-                    <h4 className="text-m font-medium text-gray-300">I am hired to bring non-SAP experience and lead new strategies for payments</h4>  
-                      <li>Digital payments across 40 countries, supplier payments and retailer collections  </li>
-                      <li>SAP FICO and Stripe, Global payments for 150+ regional offices of Volvo</li>
+                    <h4 className="text-m font-medium text-gray-300">{journeyItems[0].highlight}</h4>  
+                      <li>{journeyItems[0].bullets[0]}</li>
+                      <li>{journeyItems[0].bullets[1]}</li>
                     </ul>
                   </div>
-                  <p className="text-gray-100 ">2024-Present</p>
+                  <p className="text-gray-100 ">{journeyItems[0].period}</p>
                 </div>
               </div>
 

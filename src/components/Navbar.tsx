@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Home, User, Code, Mail, Briefcase, BookOpen } from "lucide-react";
+import { Menu, X, Home, User, Code, Mail, Briefcase, BookOpen, Sparkles } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link as ScrollLink, scroller } from "react-scroll";
 
@@ -16,6 +16,12 @@ const Navbar = () => {
     { name: "Projects", href: "/projects", isScroll: false, icon: Briefcase },
     { name: "Blog", href: "/blog", isScroll: false, icon: BookOpen },
   ];
+
+  const toggleSpaceMode = () => {
+    window.dispatchEvent(new CustomEvent("toggle-space-mode"));
+    navigate("/");
+    setIsOpen(false);
+  };
 
   const handleNavClick = (href: string, isScroll: boolean) => {
     if (isScroll) {
@@ -79,6 +85,13 @@ const Navbar = () => {
                   </button>
                 );
               })}
+              <button
+                onClick={toggleSpaceMode}
+                className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2"
+              >
+                <Sparkles size={16} />
+                Space Mode
+              </button>
             </div>
           </div>
 
@@ -108,13 +121,20 @@ const Navbar = () => {
                     location.pathname === item.href
                       ? "text-purple-light"
                       : "text-gray-300 hover:text-white"
-                  } block px-3 py-2 rounded-md text-base font-medium flex items-center gap-3 w-full`}
+                  } px-3 py-2 rounded-md text-base font-medium flex items-center gap-3 w-full`}
                 >
                   <IconComponent size={18} />
                   {item.name}
                 </button>
               );
             })}
+            <button
+              onClick={toggleSpaceMode}
+              className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium flex items-center gap-3 w-full"
+            >
+              <Sparkles size={18} />
+              Space Mode
+            </button>
           </div>
         </div>
       )}

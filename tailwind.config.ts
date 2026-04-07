@@ -7,6 +7,7 @@ export default {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./project/src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -19,6 +20,17 @@ export default {
     },
     extend: {
       colors: {
+        space: {
+          black: "#020202",
+          deep: "#0a0a0a",
+        },
+        hud: {
+          white: "#FFFFFF",
+          dim: "#4F4F4F",
+          glow: "rgba(255, 255, 255, 0.8)",
+          faint: "rgba(255, 255, 255, 0.05)",
+          border: "rgba(255, 255, 255, 0.1)",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -79,11 +91,25 @@ export default {
           "0%": { opacity: "0", transform: "translateY(10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        glow: {
+          "0%": { textShadow: "0 0 4px rgba(255,255,255,0.4)" },
+          "100%": { textShadow: "0 0 8px rgba(255,255,255,0.8)" },
+        },
+        scan: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100vh)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out forwards",
+        glow: "glow 2s ease-in-out infinite alternate",
+        scan: "scan 8s linear infinite",
+      },
+      fontFamily: {
+        sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
     },
   },
