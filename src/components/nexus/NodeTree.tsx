@@ -125,16 +125,29 @@ export default function NodeTree() {
 
       <group position={[0, 0, 0]}>
         <Html center style={{ pointerEvents: 'auto', userSelect: 'none' }}>
-          <div
-            className="flex items-center gap-3 cursor-pointer group px-4 py-2 rounded-full border border-cyan-200/30 bg-gradient-to-r from-cyan-300/18 via-white/16 to-indigo-300/16 backdrop-blur-md transition-all duration-300 hover:from-cyan-200/26 hover:to-indigo-200/24 shadow-[0_0_24px_rgba(120,220,255,0.32)]"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCenterClick();
-            }}
-          >
-            <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-cyan-100/95 uppercase transition-colors duration-300 whitespace-nowrap drop-shadow-[0_0_8px_rgba(160,240,255,0.8)]">
-              KUMAR PRIYANSHU
-            </span>
+          {/* Nebula halo + cyan/indigo pill so origin reads as the energy source (not flat white). */}
+          <div className="relative flex items-center justify-center">
+            <div
+              className="pointer-events-none absolute left-1/2 top-1/2 h-32 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-cyan-400/35 via-indigo-500/25 to-cyan-300/20 blur-2xl opacity-90"
+              aria-hidden
+            />
+            <div
+              className="relative flex cursor-pointer items-center gap-3 rounded-full border border-cyan-200/35 bg-gradient-to-r from-cyan-300/22 via-white/14 to-indigo-400/20 px-4 py-2 shadow-[0_0_32px_rgba(56,189,248,0.35),0_0_60px_rgba(99,102,241,0.18)] backdrop-blur-md transition-all duration-300 hover:border-cyan-100/45 hover:from-cyan-200/30 hover:to-indigo-300/28 hover:shadow-[0_0_40px_rgba(56,189,248,0.45)]"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCenterClick();
+              }}
+            >
+              <span
+                className="whitespace-nowrap font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-50 transition-colors duration-300"
+                style={{
+                  color: "rgb(236 254 255)",
+                  textShadow: "0 0 14px rgba(103,232,249,0.75), 0 0 28px rgba(99,102,241,0.35)",
+                }}
+              >
+                KUMAR PRIYANSHU
+              </span>
+            </div>
           </div>
         </Html>
       </group>

@@ -33,6 +33,8 @@ export default function CameraController() {
   const lastPointer = useRef(new THREE.Vector2(0, 0));
   const prevTarget = useRef<[number, number, number]>([0, 0, 5]);
   const zoomOffset = useRef(0);
+  const isPinching = useRef(false);
+  const lastPinchDistance = useRef(0);
 
   const framedTarget = useMemo(() => {
     const [fallbackX, fallbackY, fallbackZ] = cameraTarget;
@@ -82,7 +84,7 @@ export default function CameraController() {
     };
 
     const onPointerMove = (e: PointerEvent) => {
-      if (!isDragging.current) return;
+      if (!isDragging.current || isPinching.current) return;
       const dx = e.clientX - lastPointer.current.x;
       const dy = e.clientY - lastPointer.current.y;
 
@@ -91,8 +93,11 @@ export default function CameraController() {
       const worldHeight = 2 * Math.tan(fovRad / 2) * tz;
       const worldWidth = worldHeight * (size.width / size.height);
 
-      panOffset.current.x -= (dx / size.width) * worldWidth;
-      panOffset.current.y += (dy / size.height) * worldHeight;
+      // Softer single-finger pan on touch to reduce accidental drift vs pinch intent.
+      const touchMul = e.pointerType === "touch" ? 0.42 : 1;
+
+      panOffset.current.x -= (dx / size.width) * worldWidth * touchMul;
+      panOffset.current.y += (dy / size.height) * worldHeight * touchMul;
       lastPointer.current.set(e.clientX, e.clientY);
     };
 
@@ -102,7 +107,43 @@ export default function CameraController() {
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      zoomOffset.current = Math.min(7, Math.max(-2.5, zoomOffset.current + e.deltaY * 0.0025));
+      // Stronger wheel / trackpad zoom so in/out is easier than before.
+      zoomOffset.current = Math.min(7, Math.max(-2.5, zoomOffset.current + e.deltaY * 0.0048));
+    };
+
+    const pinchDistance = (touches: TouchList) => {
+      if (touches.length < 2) return 0;
+      const a = touches[0];
+      const b = touches[1];
+      return Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        isPinching.current = true;
+        isDragging.current = false;
+        lastPinchDistance.current = pinchDistance(e.touches);
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        isPinching.current = true;
+        const d = pinchDistance(e.touches);
+        if (lastPinchDistance.current > 0 && d > 0) {
+          const delta = d - lastPinchDistance.current;
+          zoomOffset.current = Math.min(7, Math.max(-2.5, zoomOffset.current - delta * 0.035));
+        }
+        lastPinchDistance.current = d;
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) {
+        isPinching.current = false;
+        lastPinchDistance.current = 0;
+      }
     };
 
     el.addEventListener('pointerdown', onPointerDown);
@@ -110,6 +151,10 @@ export default function CameraController() {
     el.addEventListener('pointerup', onPointerUp);
     el.addEventListener('pointercancel', onPointerUp);
     el.addEventListener('wheel', onWheel, { passive: false });
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd);
+    el.addEventListener('touchcancel', onTouchEnd);
 
     return () => {
       el.removeEventListener('pointerdown', onPointerDown);
@@ -117,6 +162,10 @@ export default function CameraController() {
       el.removeEventListener('pointerup', onPointerUp);
       el.removeEventListener('pointercancel', onPointerUp);
       el.removeEventListener('wheel', onWheel);
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+      el.removeEventListener('touchcancel', onTouchEnd);
     };
   }, [gl, size, framedTarget]);
 

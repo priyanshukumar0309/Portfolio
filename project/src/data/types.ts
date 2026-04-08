@@ -1,3 +1,8 @@
+import type { DetailPanelIconKey } from "../../../src/data/detailPanelIconKeys";
+
+/** Re-export for space data modules that import from `project/src/data/types`. */
+export type { DetailPanelIconKey };
+
 export interface PMAttributes {
   problem: string;
   solution: string;
@@ -8,17 +13,30 @@ export interface PMAttributes {
 export interface DetailPanelButton {
   label: string;
   url: string;
+  /** Lucide key from `src/data/detailPanelIconKeys.ts`; omitted => inferred in registry */
+  icon?: DetailPanelIconKey;
 }
 
 export interface DetailPanelSection {
-  heading: string;
-  content: string;
+  /** Stable id for React keys, CMS mapping, and localStorage overrides (e.g. `origin_role`, `project_refs`). */
+  key: string;
+  /** Human-readable heading — fully data-driven; UI does not assume fixed labels. */
+  title: string;
+  /** Section body copy. */
+  body: string;
   buttons?: DetailPanelButton[];
+  /** Small marker next to section title in the HUD */
+  headingIcon?: DetailPanelIconKey;
 }
 
 export interface DetailPanelConfig {
   headingName?: string;
   sections: DetailPanelSection[];
+  /** Overrides default Cpu / Satellite markers for the technologies row and chips */
+  technologiesHeadingIcon?: DetailPanelIconKey;
+  technologyChipIcon?: DetailPanelIconKey;
+  /** Accent over the hero image frame */
+  imageAccentIcon?: DetailPanelIconKey;
 }
 
 export interface NodeData {

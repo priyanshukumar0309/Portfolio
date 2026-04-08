@@ -24,107 +24,152 @@ export interface SkillCategory {
 
 export const portfolioOwner = {
   name: "Kumar Priyanshu",
-  title: "Product Manager",
-  heroTitle: "Fintech & Automotive Innovations",
-  heroSubtitle: "Bridging the gap between technology and mobility solutions",
+  title: "Product Manager & Strategist",
+  heroTitle: "Global Payments & ERP Platforms",
+  heroSubtitle:
+    "8+ years building and scaling payments, checkout, and finance systems — with a curiosity lens at the intersection of sociology, digital anthropology, and futurism.",
 };
 
 export const aboutContent = {
   bullets: [
-    "Product Manager with expertise in fintech and automotive technologies",
-    "Passionate about revolutionizing mobility through financial technology",
-    "Experienced in leading cross-functional teams with data-driven execution",
+    "Product Manager and strategist with **8+ years** scaling **global payments**, **checkout**, and **finance / ERP** platforms.",
+    "Payments taught discipline and resilience in complex systems; socio-technical curiosity drives **future-ready**, **culturally adaptive** product design.",
+    "Proven systems expertise plus **AI transformation** in finance ops — automation-first, ROI-led **build vs buy**, and enterprise-grade delivery.",
   ],
   summary:
-    "I specialize in bridging the gap between automotive innovation and financial technology, creating solutions that make vehicle ownership and mobility more accessible and efficient.",
+    "I bring both: hands-on ownership of payments APIs, checkout, treasury integrations, and ERP-adjacent finance products, and a lens on how people and institutions adopt technology — so solutions stay **technically robust** and **humanly sensible**.",
 };
 
 export const journeyItems: JourneyItem[] = [
   {
     company: "Volvo Cars",
-    role: "Product Manager",
-    period: "2024-Present",
-    highlight: "Lead new payment strategies with non-SAP experience",
+    role: "Product Manager — Digital Payments & In-House Cash Management",
+    period: "Jun 2024 – Present",
+    highlight:
+      "Lead PM for payments, cash management, and finance ERP; enterprise **AI agent** automation for Finance & Ops with targeted **cost savings**.",
     bullets: [
-      "Digital payments across 40 countries, supplier payments and retailer collections",
-      "SAP FICO and Stripe integrations for 150+ regional offices",
+      "Automation-first ops targeting **85%** auto-posting/clearing; **20% YoY** volume growth without added headcount (**700B+** monthly volume, **320K+** transactions, **200+** accounts, **60+** banks, **40+** countries).",
+      "Treasury partnership: **50+ MSEK** forex and **100+ MSEK** interest/WACC-style gains; Stripe vs SAP **build vs buy** strategy.",
     ],
   },
   {
-    company: "Paysafe",
+    company: "Paysafe Group",
     role: "Senior Product Manager",
-    period: "2023-2024",
-    highlight: "Promoted from execution ownership to global product strategy",
+    period: "Mar 2023 – Jun 2024",
+    highlight: "Led **3** PMs across Payments API, Checkout, SDK, and APMs; single enterprise-grade platform vision.",
     bullets: [
-      "Led strategy for APMs, APIs and Checkout across crypto, iGaming and travel",
-      "Scaled solutions supporting 4500+ clients and $20B+ annual volume",
+      "Global consolidation of Checkout, APMs, and Payments API — **~$5M** annual savings; **4500+** clients and **$25B+** volume across segments (crypto, iGaming, travel, insurance).",
+      "Geographic expansion **NA, LATAM, MENA**; unified APIs, flows, and onboarding for Skrill, Neteller, PaysafeCard, PaysafeCash.",
     ],
   },
   {
-    company: "Paysafe",
+    company: "Paysafe Group",
     role: "Product Manager",
-    period: "2021-2023",
-    highlight: "Built API-first payment products and GTM execution",
+    period: "Jul 2021 – Mar 2023",
+    highlight: "Lead for Payments API, Checkout, and SDK/JS — new Checkout from ideation through post-launch.",
     bullets: [
-      "Owned Payments API GTM, APM integrations and checkout development",
-      "Expanded payment services into scalable API-based global solutions",
+      "**~200% YoY** volume growth; **80** new clients; **$1.2B** TPV in Y1 and **$5B** in Y2 after Checkout GTM.",
+      "Legacy services rebuilt as **API-first** Checkout and APM products; enterprise solutioning across **USA, CA, MENA, LATAM, EU**.",
+    ],
+  },
+  {
+    company: "Wipro Ltd",
+    role: "Product Management Consultant",
+    period: "Jan 2021 – Jul 2021",
+    highlight: "API digital banking and payments; **50+** developers and **5** leads; **450+** services migrated cloud-side.",
+    bullets: [
+      "Inter- and intra-bank API integrations and product mapping at scale.",
+      "Live traffic migration for **3000+** clients from legacy to cloud infrastructure.",
     ],
   },
   {
     company: "ICICI Bank",
     role: "Product Manager",
-    period: "2019-2021",
-    highlight: "Started as analyst and shipped platform-level fintech solutions",
+    period: "Jul 2019 – Aug 2020",
+    highlight: "Headed **30**-developer API gateway for API Banking and Open Banking.",
     bullets: [
-      "Built API Gateway integrations for 20+ products with 40M+ daily transactions",
-      "Managed VKYC, UPI and API portal architecture using APIGEE and Layer 7",
+      "**20+** banking products streamlined for fintech integrations; **40M+** transactions/day across products.",
+      "Launched **API Banking portal** for onboarding automation; **ICICI Appathon** — **300+** startups, **1M INR** in awards; VKYC, UPI, EKYC, instant accounts.",
     ],
   },
   {
     company: "IIT Bombay",
     role: "B.Tech, Civil Engineering",
     period: "2015-2019",
-    highlight: "Built a strong analytical and engineering foundation.",
+    highlight: "Remote sensing & image processing; research, mentorship, and institute leadership.",
     bullets: [
-      "Specialized in Remote Sensing and Image Processing.",
-      "Completed undergraduate research and leadership responsibilities.",
+      "Purdue visiting research: hydrological model optimization **~85%** faster; GUI for non-technical users.",
+      "ISMP mentor (**12** students); multiple institute awards including **Exemplary Performer** and **Undergraduate Research Award**.",
     ],
-    referenceLabel: "Home Reference",
-    referenceUrl: "https://www.iitb.ac.in/",
   },
 ];
 
 export const skillCategories: SkillCategory[] = [
   {
     title: "Product Management",
-    skills: ["Agile/Scrum", "Product Strategy", "User Research", "Data Analytics", "Roadmapping"],
+    skills: [
+      "SAFe 6 PO/PM",
+      "Enterprise payments strategy",
+      "GTM & checkout launches",
+      "Roadmapping & prioritization",
+      "Cross-functional leadership",
+    ],
   },
   {
     title: "Fintech",
-    skills: ["Payment Systems", "Financial Analysis", "Risk Management", "Banking APIs", "Blockchain"],
+    skills: [
+      "Payments API & Checkout",
+      "Treasury & cash management",
+      "Open Banking / API banking",
+      "APIGEE & API gateways",
+      "Risk-aware scaling ($B+ volume)",
+    ],
   },
   {
-    title: "Automotive",
-    skills: ["Fleet Management", "Telematics", "Vehicle Diagnostics", "Connected Car", "EV Technology"],
+    title: "Platforms & scale",
+    skills: [
+      "ERP-adjacent finance products",
+      "Cloud migration at scale",
+      "Merchant & bank integrations",
+      "Global rollout (40+ countries)",
+      "Wallet & APM ecosystems",
+    ],
   },
   {
     title: "Technical",
-    skills: ["SQL", "Python", "API Integration", "Data Visualization", "Cloud Platforms"],
+    skills: ["SQL & data", "Python", "AWS", "API design & security", "APIGEE specialization"],
   },
   {
     title: "AI",
-    skills: ["AI Agents", "Workflow Automation", "Prompt Design", "LLM Integrations", "RAG Basics"],
+    skills: [
+      "Finance & ops AI agents",
+      "Workflow automation",
+      "LLM-assisted products",
+      "Prompt & evaluation design",
+      "RAG basics",
+    ],
+  },
+  {
+    title: "Certifications",
+    skills: [
+      "SAFe 6 PO/PM",
+      "AWS Cloud",
+      "APIGEE API design",
+      "IBM Databases & SQL",
+      "API Security Fundamentals",
+      "Data Science Boot Camp",
+    ],
   },
 ];
 
 export const featuredProjects: FeaturedProject[] = [
   {
     id: "finafa-eu",
-    title: "Finafa.eu",
+    title: "Finafa AI",
     description:
-      "Founder of an end-to-end SMB finance management platform with accounting, invoicing, expense tracking and analytics.",
+      "Founder — **Finafa.eu** (Sep 2025–present). AI-assisted accounting MVP for SMEs: automated ledger entries and reconciliation. Core logic for **AI-driven categorization**, cutting manual accounting effort by an estimated **60%**.",
     image: "/Fino.webp",
-    technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
+    technologies: ["AI accounting", "SME finance", "Ledger automation", "Product zero-to-one"],
     liveUrl: "https://finafa.eu",
   },
   {
@@ -132,8 +177,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: "Automobile LoanHub",
     description:
       "A platform that simplifies car financing by helping users compare and choose the best leasing and loan options.",
-    image:
-      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
     technologies: ["React Native", "Node.js", "PostgreSQL"],
     liveUrl: "https://loanhub.kumarpriyanshu.in/",
   },
@@ -142,18 +186,17 @@ export const featuredProjects: FeaturedProject[] = [
     title: "AI-Enabled Automation",
     description:
       "Interactive AI assistant demo for global accounting workflows and decision support.",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
     technologies: ["AI Agent", "Automation", "Finance Ops"],
     liveUrl: "https://ai-agent-mock.kumarpriyanshu.in/",
   },
   {
     id: "socur",
-    title: "Socur",
-    description: "Sovereign Curiosity initiative focused on curated knowledge experiences.",
-    image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
-    technologies: ["Content Platform", "Knowledge Design", "Product Strategy"],
+    title: "Sovereign Curiosity (Socur)",
+    description:
+      "Founder — **Socur.finafa.eu** (Jan 2026–present). Digital platform at the intersection of **AI and sociology**: explore topics and map knowledge graphs. Beta: AI-enabled synthesis of interests with text/image nudges.",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    technologies: ["Knowledge graphs", "AI synthesis", "Sociology × product", "Beta platform"],
     liveUrl: "https://socur.finafa.eu/",
   },
 ];

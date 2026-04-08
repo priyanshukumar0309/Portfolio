@@ -73,7 +73,8 @@ export default function NodePoint({ node, visible, onNodeClick, active, showSubt
     <group ref={groupRef}>
       <Html center style={{ pointerEvents: 'auto', userSelect: 'none', whiteSpace: 'nowrap' }}>
         <div
-          className={`cursor-pointer transition-all duration-300 flex flex-col items-center ${isMobile ? 'gap-0.5' : 'gap-1'} ${hovered && !isMobile ? 'scale-105' : ''}`}
+          className={`flex cursor-pointer flex-col items-center transition-all duration-300 ${isMobile ? "gap-0.5" : "gap-1"} ${hovered && !isMobile ? "scale-105" : ""}`}
+          style={{ color: "rgb(250 250 250)" }}
           onClick={(e) => {
             e.stopPropagation();
             onNodeClick(node);
@@ -88,27 +89,34 @@ export default function NodePoint({ node, visible, onNodeClick, active, showSubt
           onMouseLeave={() => setHovered(false)}
         >
           <div
-            className={`rounded-full border transition-all duration-300 backdrop-blur-md ${
-              isMobile ? 'px-1.5 py-px' : isDeepNode ? 'px-2.5 py-0.5' : 'px-3 py-1'
+            className={`rounded-full border backdrop-blur-md transition-all duration-300 ${
+              isMobile ? "px-1.5 py-px" : isDeepNode ? "px-2.5 py-0.5" : "px-3 py-1"
             } ${
-              active ? 'bg-black/70 border-white/25' : hovered ? 'bg-black/65 border-white/18' : 'bg-black/50 border-white/10'
+              active ? "border-white/45 bg-black/65" : hovered ? "border-white/35 bg-black/60" : "border-white/28 bg-black/50"
             }`}
           >
             <span
-              style={{ fontSize: isMobile ? '7px' : isDeepNode ? '10px' : '12px' }}
-              className={`font-mono font-semibold ${isMobile ? 'tracking-[0.06em]' : isDeepNode ? 'tracking-[0.1em]' : 'tracking-[0.14em]'} uppercase whitespace-nowrap transition-colors duration-300 ${
-                active ? 'text-white' : hovered ? 'text-white/90' : 'text-white/60'
+              style={{
+                fontSize: isMobile ? "7px" : isDeepNode ? "10px" : "12px",
+                color: active || hovered ? "rgb(255 255 255)" : "rgb(255 255 255 / 0.94)",
+                textShadow: "0 0 12px rgba(255,255,255,0.2)",
+              }}
+              className={`font-mono font-semibold uppercase whitespace-nowrap transition-colors duration-300 ${
+                isMobile ? "tracking-[0.06em]" : isDeepNode ? "tracking-[0.1em]" : "tracking-[0.14em]"
               }`}
             >
               {node.label}
             </span>
           </div>
           {!isMobile && showSubtitle && (node.subtitle || node.period) && (
-            <div className="px-2 py-0.5 rounded-full bg-black/40 border border-white/8 backdrop-blur-sm">
-              <div className="font-mono text-[9px] font-medium tracking-[0.06em] text-white/35 flex items-center justify-center gap-1.5 whitespace-nowrap">
-                {node.subtitle && <span>{node.subtitle}</span>}
-                {node.subtitle && node.period && <span className="text-white/18">|</span>}
-                {node.period && <span className="text-white/25">{node.period}</span>}
+            <div className="rounded-full border border-white/22 bg-black/50 px-2 py-0.5 backdrop-blur-sm">
+              <div
+                className="flex items-center justify-center gap-1.5 whitespace-nowrap font-mono text-[9px] font-medium tracking-[0.06em]"
+                style={{ color: "rgb(255 255 255 / 0.78)" }}
+              >
+                {node.subtitle && <span style={{ color: "rgb(255 255 255 / 0.82)" }}>{node.subtitle}</span>}
+                {node.subtitle && node.period && <span style={{ color: "rgb(255 255 255 / 0.4)" }}>|</span>}
+                {node.period && <span style={{ color: "rgb(255 255 255 / 0.65)" }}>{node.period}</span>}
               </div>
             </div>
           )}
