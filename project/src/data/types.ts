@@ -32,6 +32,8 @@ export interface DetailPanelSection {
 export interface DetailPanelConfig {
   headingName?: string;
   sections: DetailPanelSection[];
+  /** Chip row under sections (optional; legacy trees may still use `NodeData.attributes.technologies`). */
+  technologies?: string[];
   /** Overrides default Cpu / Satellite markers for the technologies row and chips */
   technologiesHeadingIcon?: DetailPanelIconKey;
   technologyChipIcon?: DetailPanelIconKey;

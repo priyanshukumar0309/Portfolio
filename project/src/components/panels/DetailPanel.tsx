@@ -11,6 +11,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSpace } from '@/context/SpaceContext';
 import { PORTFOLIO_OWNER } from '@/data/portfolioData';
+import { formatCareerYearRange, isCareerGraphNode } from '@/data/careerYearRange';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { getDetailPanelLucideIcon } from '@/data/detailPanelLucideRegistry';
 import type { DetailPanelIconKey } from '@/data/detailPanelIconKeys';
@@ -70,6 +71,15 @@ function getPanelSections(activePanel: any) {
   ];
 }
 
+/** Prefer `detailPanel.technologies`, then legacy `attributes.technologies` (e.g. old localStorage JSON). */
+function getPanelTechnologies(activePanel: any): string[] {
+  const fromDetail = activePanel.detailPanel?.technologies;
+  const fromAttrs = activePanel.attributes?.technologies;
+  if (Array.isArray(fromDetail) && fromDetail.length > 0) return fromDetail;
+  if (Array.isArray(fromAttrs) && fromAttrs.length > 0) return fromAttrs;
+  return [];
+}
+
 /** Sidebar link row: white/neutral chrome, Lucide icon + label from `portfolioData` (no fixed “Egress” copy). */
 function HudLinkButton({
   href,
@@ -90,8 +100,8 @@ function HudLinkButton({
   }>;
   const row =
     compact
-      ? 'group relative inline-flex min-h-[40px] w-full items-center gap-3 overflow-hidden rounded-lg border border-white/20 bg-white/[0.04] px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 hover:border-white/40 hover:bg-white/[0.07] active:scale-[0.99]'
-      : 'group relative inline-flex min-h-[44px] items-center gap-3 overflow-hidden rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 hover:border-white/40 hover:bg-white/[0.07] active:scale-[0.99]';
+      ? 'group relative inline-flex w-fit max-w-full min-h-[32px] items-center gap-2 overflow-hidden rounded-md border border-white/18 bg-white/[0.05] px-2.5 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-300 hover:border-white/35 hover:bg-white/[0.08] active:scale-[0.99]'
+      : 'group relative inline-flex w-fit max-w-full min-h-[34px] items-center gap-2 overflow-hidden rounded-md border border-white/18 bg-white/[0.05] px-3 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-300 hover:border-white/35 hover:bg-white/[0.08] active:scale-[0.99]';
   return (
     <a
       href={href}
@@ -101,16 +111,16 @@ function HudLinkButton({
       style={{ color: "rgb(250 250 250)" }}
     >
       <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.05)_45%,transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/25 bg-black/40 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]">
-        <Icon size={15} strokeWidth={2} style={{ color: "rgb(250 250 250)" }} aria-hidden />
+      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded border border-white/22 bg-black/35 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)]">
+        <Icon size={13} strokeWidth={2} style={{ color: "rgb(250 250 250)" }} aria-hidden />
       </span>
       <span
-        className="relative min-w-0 flex-1 truncate text-left font-mono text-[12px] font-medium normal-case tracking-normal"
+        className="relative max-w-[200px] truncate text-left font-sans text-[12px] font-medium normal-case tracking-normal sm:max-w-[240px]"
         style={{ color: "rgb(250 250 250 / 0.95)" }}
       >
         {label}
       </span>
-      <ExternalLink size={14} strokeWidth={2} className="relative shrink-0 text-white/45 transition-colors group-hover:text-white/85" aria-hidden />
+      <ExternalLink size={12} strokeWidth={2} className="relative shrink-0 text-white/40 transition-colors group-hover:text-white/80" aria-hidden />
     </a>
   );
 }
@@ -150,6 +160,8 @@ export default function DetailPanel() {
   };
 
   const visible = isActivated && activePanel !== null;
+  const careerHeaderYears =
+    activePanel && isCareerGraphNode(activePanel.id) ? formatCareerYearRange(activePanel.period) : null;
 
   const sections = activePanel ? getPanelSections(activePanel) : [];
   const detailUi = activePanel?.detailPanel;
@@ -160,11 +172,6 @@ export default function DetailPanel() {
     'aria-hidden'?: boolean;
   }>;
   const TechHeadingIcon = getDetailPanelLucideIcon(detailUi?.technologiesHeadingIcon ?? 'cpu', '', '') as ComponentType<{
-    size?: number;
-    className?: string;
-    'aria-hidden'?: boolean;
-  }>;
-  const TechChipIcon = getDetailPanelLucideIcon(detailUi?.technologyChipIcon ?? 'satellite', '', '') as ComponentType<{
     size?: number;
     className?: string;
     'aria-hidden'?: boolean;
@@ -181,14 +188,14 @@ export default function DetailPanel() {
         </div>
       )}
       <div className={isMobile ? 'px-5 py-4 text-neutral-100' : 'p-8 text-neutral-100'} style={{ color: "rgb(245 245 245 / 0.95)" }}>
-        {(activePanel.attributes || activePanel.detailPanel) ? (
+        {(sections.length > 0 || getPanelTechnologies(activePanel).length > 0 || activePanel.detailPanel || activePanel.attributes) ? (
           <div className={isMobile ? 'space-y-0' : 'space-y-0'}>
             {sections.map((section: any, index: number) => (
               <div key={section.key} className="space-y-2">
                 {index > 0 && <div className="mb-4 h-px w-full bg-gradient-to-r from-transparent via-white/25 to-transparent" />}
                 <Section title={section.title} body={section.body} headingIcon={section.headingIcon} />
                 {section.buttons.length > 0 && (
-                  <div className={`flex flex-col gap-2 ${isMobile ? 'pt-1' : 'pt-2'}`}>
+                  <div className={`flex flex-wrap gap-2 ${isMobile ? 'pt-1' : 'pt-2'}`}>
                     {section.buttons.map((button: any) => (
                       <HudLinkButton
                         key={`${section.key}-${button.label}`}
@@ -202,29 +209,51 @@ export default function DetailPanel() {
                 )}
               </div>
             ))}
-            {activePanel.attributes?.technologies?.length > 0 && (
+            {getPanelTechnologies(activePanel).length > 0 && (
               <div>
                 {sections.length > 0 && <div className="mb-4 mt-2 h-px w-full bg-gradient-to-r from-transparent via-white/25 to-transparent" />}
-                <h3 className="mb-3 flex items-center gap-2 font-mono text-[9px] tracking-[0.25em] text-cyan-200/50 uppercase">
+                <h3 className="mb-2 flex items-center gap-2 font-sans text-[10px] font-medium tracking-[0.2em] text-cyan-200/55 uppercase">
                   <TechHeadingIcon size={12} className="text-cyan-400/70" aria-hidden />
                   Technologies
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {activePanel.attributes.technologies.map((tech: string) => (
-                    <span
+                {/* One chip per row: calmer border/fill (less glass) so list reads as a simple stack */}
+                <div className="flex flex-col gap-2">
+                  {getPanelTechnologies(activePanel).map((tech: string) => (
+                    <div
                       key={tech}
-                      className={`inline-flex items-center gap-1.5 border border-cyan-500/20 bg-cyan-500/[0.06] font-mono text-[10px] tracking-wider text-cyan-100/70 shadow-[inset_0_0_0_1px_rgba(34,211,238,0.08)] ${isMobile ? 'px-2.5 py-1' : 'px-3 py-1.5'} rounded-sm`}
+                      className="w-full rounded-md border border-white/10 bg-black/35 px-3 py-2 font-sans text-[12px] font-normal leading-snug text-white/78"
                     >
-                      <TechChipIcon size={10} className="text-cyan-400/50" aria-hidden />
                       {tech}
-                    </span>
+                    </div>
                   ))}
+                </div>
+              </div>
+            )}
+            {activePanel.children?.length > 0 && (
+              <div>
+                <div className="mb-4 mt-2 h-px w-full bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                <h3 className="mb-2 flex items-center gap-2 font-sans text-[10px] font-medium tracking-[0.2em] text-cyan-200/55 uppercase">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300/70" />
+                  Sub Nodes
+                </h3>
+                <div className="space-y-1">
+                  {activePanel.children.map((child: any) => {
+                    const childYears = isCareerGraphNode(child.id) ? formatCareerYearRange(child.period) : null;
+                    return (
+                      <div key={child.id}>
+                        <div className="font-sans text-[12px] leading-snug text-white/75">{child.label}</div>
+                        {childYears && (
+                          <div className="mt-px font-sans text-[9px] leading-none tracking-wide text-white/38">{childYears}</div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
           </div>
         ) : (
-          <div className="font-mono text-[11px] text-white/20 tracking-wider">[Data module pending upload]</div>
+          <div className="font-sans text-[12px] text-white/25 tracking-wide">[Data module pending upload]</div>
         )}
       </div>
     </>
@@ -251,7 +280,7 @@ export default function DetailPanel() {
               aria-label="Open panel"
             >
               <PanelLeftOpen size={14} className="text-cyan-300/80" aria-hidden />
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-cyan-100/80">Open bay</span>
+              <span className="font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-cyan-100/80">Open bay</span>
               <ChevronUp size={14} className="text-cyan-200/70" />
             </motion.button>
           )}
@@ -262,21 +291,27 @@ export default function DetailPanel() {
               <div
               className="relative flex h-full w-full flex-col overflow-hidden text-neutral-100"
               style={{
-                background: "linear-gradient(180deg, rgba(10,10,16,0.16), rgba(4,4,8,0.2))",
-                backdropFilter: "blur(34px) saturate(125%)",
-                borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "linear-gradient(180deg, rgba(12,12,18,0.9), rgba(6,6,10,0.94))",
+                backdropFilter: "blur(28px) saturate(110%)",
+                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
                 color: "rgb(245 245 245 / 0.95)",
               }}
             >
-                <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(115deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 34%, rgba(255,255,255,0) 62%)' }} />
+                <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(115deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0) 65%)' }} />
                 <div className="flex shrink-0 items-center justify-between border-b border-white/[0.06] px-5 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                   <div className="flex min-w-0 items-center gap-3">
                     <button type="button" onClick={togglePanel} className={hudIconButtonClass} aria-label="Collapse panel">
                       <ChevronDown size={16} />
                     </button>
                     <div className="min-w-0">
-                      <h2 className="truncate font-sans text-[15px] font-semibold tracking-wide text-white">{activePanel.id === 'nexus' ? PORTFOLIO_OWNER.name : activePanel.label}</h2>
-                      <p className="truncate font-mono text-[10px] uppercase tracking-[0.12em] text-white/40">{activePanel.id === 'nexus' ? PORTFOLIO_OWNER.title : activePanel.subtitle ?? activePanel.period ?? ''}</p>
+                      <h2 className="truncate font-display text-[15px] font-semibold tracking-wide text-white">{activePanel.id === 'nexus' ? PORTFOLIO_OWNER.name : activePanel.label}</h2>
+                      {activePanel.id === 'nexus' ? (
+                        <p className="truncate font-sans text-[10px] tracking-wide text-white/45">{PORTFOLIO_OWNER.title}</p>
+                      ) : (
+                        careerHeaderYears && (
+                          <p className="truncate font-sans text-[9px] leading-none tracking-wide text-white/42">{careerHeaderYears}</p>
+                        )
+                      )}
                     </div>
                   </div>
                   <button type="button" onClick={handleClose} className={hudIconButtonClass} aria-label="Close panel">
@@ -300,19 +335,24 @@ export default function DetailPanel() {
             <div
               className="relative h-full overflow-y-auto text-neutral-100"
               style={{
-                background: "linear-gradient(160deg, rgba(10,10,16,0.14), rgba(4,4,8,0.24))",
-                backdropFilter: "blur(34px) saturate(125%)",
-                borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "linear-gradient(160deg, rgba(12,12,18,0.88), rgba(6,6,10,0.93))",
+                backdropFilter: "blur(28px) saturate(110%)",
+                borderLeft: "1px solid rgba(255, 255, 255, 0.08)",
                 color: "rgb(245 245 245 / 0.95)",
               }}
             >
-              <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(120deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.018) 36%, rgba(255,255,255,0) 68%)' }} />
+              <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(120deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.012) 38%, rgba(255,255,255,0) 70%)' }} />
               <div className="p-8 pb-0">
                 <div className="mb-6 flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <h2 className="font-sans text-xl font-semibold tracking-wide text-white">{activePanel.id === 'nexus' ? PORTFOLIO_OWNER.name : activePanel.label}</h2>
-                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-white/40">{activePanel.id === 'nexus' ? PORTFOLIO_OWNER.title : activePanel.subtitle ?? activePanel.period ?? ''}</p>
-                    {activePanel.id !== 'nexus' && activePanel.subtitle && activePanel.period && <p className="mt-0.5 font-mono text-[10px] tracking-[0.1em] text-white/30">{activePanel.period}</p>}
+                    <h2 className="font-display text-xl font-semibold tracking-wide text-white">{activePanel.id === 'nexus' ? PORTFOLIO_OWNER.name : activePanel.label}</h2>
+                    {activePanel.id === 'nexus' ? (
+                      <p className="mt-1 font-sans text-[11px] tracking-wide text-white/45">{PORTFOLIO_OWNER.title}</p>
+                    ) : (
+                      careerHeaderYears && (
+                        <p className="mt-0.5 font-sans text-[10px] leading-none tracking-wide text-white/42">{careerHeaderYears}</p>
+                      )
+                    )}
                   </div>
                   <button type="button" onClick={handleClose} className={hudIconButtonClass} aria-label="Close panel">
                     <X size={18} />
@@ -353,36 +393,34 @@ export default function DetailPanel() {
 }
 
 /**
- * Sidebar copy must not inherit `body` text-foreground (dark in light mode).
- * Every span gets an explicit light color so prose stays readable on glass panels.
+ * Node sidebar uses plain copy only: strip `**` markers so emphasis never appears here
+ * (About / standard pages can still use `inlineBold` on the same source strings).
  */
+function stripSidebarEmphasis(raw: string): string {
+  return raw.replace(/\*\*/g, '');
+}
+
 function SectionBody({ text }: { text: string }) {
-  const lines = text.split(/\n+/).filter((l) => l.trim().length > 0);
+  const plain = stripSidebarEmphasis(text);
+  const lines = plain
+    .split(/\n+/)
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
+  if (lines.length === 0) return null;
+  // One paragraph: no list. Multiple lines (e.g. Scope/Impact): round disc bullets, cockpit-readable on dark glass.
+  if (lines.length === 1) {
+    return (
+      <p className="font-sans text-[13px] font-normal leading-relaxed text-white/75">{lines[0]}</p>
+    );
+  }
   return (
-    <div className="space-y-2 text-neutral-100" style={{ color: "rgb(245 245 245 / 0.92)" }}>
+    <ul className="list-disc list-outside space-y-2 pl-4 font-sans text-[13px] font-normal leading-relaxed text-white/75 marker:text-cyan-200/55">
       {lines.map((line, li) => (
-        <p key={li} className="font-sans text-[13px] leading-relaxed" style={{ color: "rgb(245 245 245 / 0.9)" }}>
-          {line.split(/(\*\*[^*]+\*\*)/g).map((part, pi) => {
-            if (part.startsWith("**") && part.endsWith("**")) {
-              return (
-                <span
-                  key={pi}
-                  className="font-semibold text-amber-200 drop-shadow-[0_0_14px_rgba(251,191,36,0.35)]"
-                  style={{ color: "rgb(254 243 199)" }}
-                >
-                  {part.slice(2, -2)}
-                </span>
-              );
-            }
-            return (
-              <span key={pi} style={{ color: "rgb(245 245 245 / 0.9)" }}>
-                {part}
-              </span>
-            );
-          })}
-        </p>
+        <li key={li} className="pl-0.5">
+          {line}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
@@ -394,7 +432,7 @@ function Section({ title, body, headingIcon }: { title: string; body: string; he
   }>;
   return (
     <div>
-      <h3 className="mb-2 flex items-center gap-2 font-mono text-[9px] tracking-[0.25em] text-cyan-100/80 uppercase">
+      <h3 className="mb-2 flex items-center gap-2 font-sans text-[10px] font-medium tracking-[0.2em] text-cyan-100/75 uppercase">
         <HeadingMarker size={11} className="shrink-0 text-cyan-200/75" aria-hidden />
         {title}
       </h3>

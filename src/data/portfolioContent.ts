@@ -44,52 +44,42 @@ export const journeyItems: JourneyItem[] = [
   {
     company: "Volvo Cars",
     role: "Product Manager — Digital Payments & In-House Cash Management",
-    period: "Jun 2024 – Present",
+    period: "2024 – Present",
     highlight:
-      "Lead PM for payments, cash management, and finance ERP; enterprise **AI agent** automation for Finance & Ops with targeted **cost savings**.",
+      "Lead PM for payments, cash management, and finance ERP; enterprise AI agent automation for Finance & Ops with targeted cost savings.",
     bullets: [
-      "Automation-first ops targeting **85%** auto-posting/clearing; **20% YoY** volume growth without added headcount (**700B+** monthly volume, **320K+** transactions, **200+** accounts, **60+** banks, **40+** countries).",
-      "Treasury partnership: **50+ MSEK** forex and **100+ MSEK** interest/WACC-style gains; Stripe vs SAP **build vs buy** strategy.",
+      "Automation-first ops targeting 85% auto-posting/clearing; 20% YoY volume growth without added headcount (700B+ monthly volume, 320K+ transactions, 200+ accounts, 60+ banks, 40+ countries).",
+      "Treasury partnership: 50+ MSEK forex and 100+ MSEK interest/WACC-style gains; Stripe vs SAP build vs buy strategy.",
     ],
   },
   {
     company: "Paysafe Group",
     role: "Senior Product Manager",
-    period: "Mar 2023 – Jun 2024",
-    highlight: "Led **3** PMs across Payments API, Checkout, SDK, and APMs; single enterprise-grade platform vision.",
+    period: "2023 –  2024",
+    highlight: "Led 3 PMs across Payments API, Checkout, SDK, and APMs; single enterprise-grade platform vision.",
     bullets: [
-      "Global consolidation of Checkout, APMs, and Payments API — **~$5M** annual savings; **4500+** clients and **$25B+** volume across segments (crypto, iGaming, travel, insurance).",
-      "Geographic expansion **NA, LATAM, MENA**; unified APIs, flows, and onboarding for Skrill, Neteller, PaysafeCard, PaysafeCash.",
+      "Global consolidation of Checkout, APMs, and Payments API — ~$5M annual savings; 4500+ clients and $25B+ volume across segments (crypto, iGaming, travel, insurance).",
+      "Geographic expansion NA, LATAM, MENA; unified APIs, flows, and onboarding for Skrill, Neteller, PaysafeCard, PaysafeCash.",
     ],
   },
   {
     company: "Paysafe Group",
     role: "Product Manager",
-    period: "Jul 2021 – Mar 2023",
+    period: "2021 – 2023",
     highlight: "Lead for Payments API, Checkout, and SDK/JS — new Checkout from ideation through post-launch.",
     bullets: [
-      "**~200% YoY** volume growth; **80** new clients; **$1.2B** TPV in Y1 and **$5B** in Y2 after Checkout GTM.",
-      "Legacy services rebuilt as **API-first** Checkout and APM products; enterprise solutioning across **USA, CA, MENA, LATAM, EU**.",
-    ],
-  },
-  {
-    company: "Wipro Ltd",
-    role: "Product Management Consultant",
-    period: "Jan 2021 – Jul 2021",
-    highlight: "API digital banking and payments; **50+** developers and **5** leads; **450+** services migrated cloud-side.",
-    bullets: [
-      "Inter- and intra-bank API integrations and product mapping at scale.",
-      "Live traffic migration for **3000+** clients from legacy to cloud infrastructure.",
+      "~200% YoY volume growth; 80 new clients; $1.2B TPV in Y1 and $5B in Y2 after Checkout GTM.",
+      "Legacy services rebuilt as API-first Checkout and APM products; enterprise solutioning across USA, CA, MENA, LATAM, EU.",
     ],
   },
   {
     company: "ICICI Bank",
     role: "Product Manager",
-    period: "Jul 2019 – Aug 2020",
-    highlight: "Headed **30**-developer API gateway for API Banking and Open Banking.",
+    period: "2019 – 2020",
+    highlight: "Headed 30-developer API gateway for API Banking and Open Banking.",
     bullets: [
-      "**20+** banking products streamlined for fintech integrations; **40M+** transactions/day across products.",
-      "Launched **API Banking portal** for onboarding automation; **ICICI Appathon** — **300+** startups, **1M INR** in awards; VKYC, UPI, EKYC, instant accounts.",
+      "20+ banking products streamlined for fintech integrations; 40M+ transactions/day across products.",
+      "Launched API Banking portal for onboarding automation; ICICI Appathon — 300+ startups, 1M INR in awards; VKYC, UPI, EKYC, instant accounts.",
     ],
   },
   {
@@ -98,8 +88,8 @@ export const journeyItems: JourneyItem[] = [
     period: "2015-2019",
     highlight: "Remote sensing & image processing; research, mentorship, and institute leadership.",
     bullets: [
-      "Purdue visiting research: hydrological model optimization **~85%** faster; GUI for non-technical users.",
-      "ISMP mentor (**12** students); multiple institute awards including **Exemplary Performer** and **Undergraduate Research Award**.",
+      "Purdue visiting research: hydrological model optimization ~85% faster; GUI for non-technical users.",
+      "ISMP mentor (12 students); multiple institute awards including Exemplary Performer and Undergraduate Research Award.",
     ],
   },
 ];

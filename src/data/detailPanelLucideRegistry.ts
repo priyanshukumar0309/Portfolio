@@ -26,6 +26,8 @@ import {
   BookText,
   Wallet,
   type LucideIcon,
+  BriefcaseIcon,
+  SwatchBook,
 } from "lucide-react";
 import type { DetailPanelIconKey } from "./detailPanelIconKeys";
 
@@ -52,6 +54,8 @@ const REGISTRY: Record<DetailPanelIconKey, LucideIcon> = {
   bot: Bot,
   layers: Layers,
   "book-text": BookText,
+  "briefcase-business": BriefcaseIcon,
+  "swatch-book": SwatchBook,
 };
 
 /** Runtime check for JSON/localStorage overrides that may use unknown keys. */

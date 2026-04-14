@@ -25,6 +25,8 @@ export const DETAIL_PANEL_ICON_KEYS = [
   "bot",
   "layers",
   "book-text",
+  "briefcase-business",
+  "swatch-book",
 ] as const;
 
 export type DetailPanelIconKey = (typeof DETAIL_PANEL_ICON_KEYS)[number];

@@ -1,9 +1,13 @@
-import { ExternalLink, Car, Building2 } from "lucide-react";
+import type { ReactNode } from "react";
+import { ExternalLink, Car, Building2, Bot, Sparkles } from "lucide-react";
 import { featuredProjects } from "@/data/portfolioContent";
 
-const iconById = {
+/** Icons by stable `id` from data (not `title`, which can change without breaking layout). */
+const iconById: Record<string, ReactNode> = {
   "finafa-eu": <Building2 className="text-purple-light" size={24} />,
   "automobile-loanhub": <Car className="text-purple-light" size={24} />,
+  "ai-enabled-automation": <Bot className="text-purple-light" size={24} />,
+  "socur": <Sparkles className="text-purple-light" size={24} />,
 };
 
 const ProjectGrid = () => {
@@ -19,12 +23,14 @@ const ProjectGrid = () => {
                 className="bg-navy p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300"
               >
                 <div className="flex items-center mb-4">
-                  {iconById[project.id as keyof typeof iconById]}
+                  {iconById[project.id] ?? (
+                    <Building2 className="text-purple-light opacity-60" size={24} aria-hidden />
+                  )}
                   <h3 className="text-xl font-semibold text-white ml-2">{project.title}</h3>
                 </div>
                 <div className="relative aspect-video mb-4 overflow-hidden rounded-lg">
-                  {/* Floating Bubbles for Finafa.eu */}
-                  {project.title === "Finafa.eu" && (
+                  {/* Floating Bubbles — key off `id` so renames of `title` do not break effects */}
+                  {project.id === "finafa-eu" && (
                     <>
                       <div className="absolute top-4 left-4 w-3 h-3 bg-blue-400 rounded-full opacity-60 animate-bubble-float-1"></div>
                       <div className="absolute top-8 right-6 w-2 h-2 bg-green-400 rounded-full opacity-50 animate-bubble-float-2"></div>
@@ -39,11 +45,11 @@ const ProjectGrid = () => {
                     src={project.image}
                     alt={project.title}
                     className={`w-full h-full ${
-                      project.title === "Finafa.eu" 
+                      project.id === "finafa-eu"
                         ? "object-contain animate-float" 
                         : "object-cover"
                     }`}
-                    style={project.title === "Finafa.eu" ? {
+                    style={project.id === "finafa-eu" ? {
                       animation: "float 3s ease-in-out infinite",
                       transformOrigin: "center bottom",
                       backgroundColor: "transparent",
@@ -51,8 +57,7 @@ const ProjectGrid = () => {
                     } : {}}
                   />
                   
-                  {/* Enhanced Glow Effect for Finafa.eu */}
-                  {project.title === "Finafa.eu" && (
+                  {project.id === "finafa-eu" && (
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-green-500/10 to-purple-500/10 rounded-lg animate-glow-pulse"></div>
                   )}
                 </div>

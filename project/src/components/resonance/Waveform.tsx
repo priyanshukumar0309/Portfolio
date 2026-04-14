@@ -23,8 +23,14 @@ export default function Waveform() {
   const animRef = useRef<number>(0);
   const mouseYRef = useRef(0.5);
   const timeRef = useRef(0);
+  /** Wall-clock start for post-boot intro: nearly flat line first, then stronger undulation and vertical “breath”. */
+  const introStartedAtRef = useRef(0);
   const { isActivated, activate } = useSpace();
   const [lineIndex, setLineIndex] = useState<number>(0);
+
+  useEffect(() => {
+    introStartedAtRef.current = performance.now();
+  }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     const centerY = window.innerHeight / 2;
@@ -77,6 +83,17 @@ export default function Waveform() {
 
       ctx.clearRect(0, 0, w, h);
 
+      const elapsed = performance.now() - introStartedAtRef.current;
+      // ~1s subtle ribbon, then ramp amplitude and add slow vertical drift before warp/activate.
+      const settleMs = 1000;
+      const rampMs = 650;
+      let introMul = 1;
+      if (elapsed < settleMs) {
+        introMul = 0.05 + 0.12 * (elapsed / settleMs);
+      } else {
+        introMul = Math.min(1, 0.17 + 0.83 * ((elapsed - settleMs) / rampMs));
+      }
+
       const centerY = h / 2;
       const proximity = mouseYRef.current;
 
@@ -87,9 +104,11 @@ export default function Waveform() {
       const lineStartX = margin;
       const lineEndX = w - margin;
 
-      const waveAmplitude = 3 + proximity * 18;
+      const waveAmplitude = (3 + proximity * 18) * introMul;
       const lineWidth = 1 + proximity * 0.5;
       const waveOpacity = 0.4 + proximity * 0.5;
+      const verticalBreath =
+        elapsed >= settleMs ? Math.sin(t * 1.05) * 11 * introMul : Math.sin(t * 0.25) * 1.5;
 
       ctx.beginPath();
       ctx.strokeStyle = `rgba(255, 255, 255, ${waveOpacity})`;
@@ -101,7 +120,7 @@ export default function Waveform() {
         const normalizedX = (x - lineStartX) / (lineEndX - lineStartX);
         const edgeFade = Math.sin(normalizedX * Math.PI);
         const n = noise(normalizedX * 10, t);
-        const y = centerY + n * waveAmplitude * edgeFade;
+        const y = centerY + verticalBreath + n * waveAmplitude * edgeFade;
 
         if (x === lineStartX) {
           ctx.moveTo(x, y);

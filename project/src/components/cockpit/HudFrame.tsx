@@ -18,18 +18,15 @@ export default function HudFrame() {
         <div className="absolute bottom-0 right-0 h-full w-[1px] bg-gradient-to-b from-white/30 to-transparent" />
       </div>
 
+      {/*
+        Vignette: softer multi-stop gradient reduces visible “steps” (banding) on near-black backgrounds.
+        No scanline layer — repeating 1px stripes read as dirty horizontal lines at common DPRs and over WebGL.
+      */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%)',
-        }}
-      />
-
-      <div
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 3px)',
-          backgroundSize: '100% 4px',
+          background:
+            'radial-gradient(ellipse 85% 85% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 42%, rgba(0,0,0,0.22) 72%, rgba(0,0,0,0.5) 100%)',
         }}
       />
     </div>

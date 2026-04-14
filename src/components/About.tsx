@@ -6,7 +6,6 @@ import { inlineBold } from "@/utils/inlineBold";
 function journeyIcon(company: string): LucideIcon {
   if (company.includes("Volvo")) return Car;
   if (company.includes("Paysafe")) return CreditCard;
-  if (company.includes("Wipro")) return Briefcase;
   if (company.includes("ICICI")) return Landmark;
   return GraduationCap;
 }

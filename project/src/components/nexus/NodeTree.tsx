@@ -100,8 +100,6 @@ export default function NodeTree() {
           l1.children?.some(c => c.id === currentNode.id || c.children?.some(gc => gc.id === currentNode.id))
         );
         const isL1OnPath = isL1Active || isChildActive;
-        const isCareerBranch = l1.id === 'career-history';
-
         return (
           <group key={l1.id}>
             <NodeLine
@@ -110,13 +108,7 @@ export default function NodeTree() {
               active={isL1OnPath}
               progress={1}
             />
-            <NodePoint
-              node={l1}
-              visible
-              onNodeClick={handleNodeClick}
-              active={isL1Active}
-              showSubtitle={false}
-            />
+            <NodePoint node={l1} visible onNodeClick={handleNodeClick} active={isL1Active} />
 
             {l1.children?.map(l2 => {
               const isL2Active = currentNode?.id === l2.id;
@@ -131,13 +123,7 @@ export default function NodeTree() {
                     active={isL2OnPath}
                     progress={isL1Expanded ? 1 : 0}
                   />
-                  <NodePoint
-                    node={l2}
-                    visible={isL1Expanded}
-                    onNodeClick={handleNodeClick}
-                    active={isL2Active}
-                    showSubtitle={isCareerBranch}
-                  />
+                  <NodePoint node={l2} visible={isL1Expanded} onNodeClick={handleNodeClick} active={isL2Active} />
                   {l2.children?.map(l3 => {
                     const isL3Active = currentNode?.id === l3.id;
                     return (
@@ -148,13 +134,7 @@ export default function NodeTree() {
                           active={isL3Active}
                           progress={isL1Expanded && isL2Expanded ? 1 : 0}
                         />
-                        <NodePoint
-                          node={l3}
-                          visible={isL1Expanded && isL2Expanded}
-                          onNodeClick={handleNodeClick}
-                          active={isL3Active}
-                          showSubtitle
-                        />
+                        <NodePoint node={l3} visible={isL1Expanded && isL2Expanded} onNodeClick={handleNodeClick} active={isL3Active} />
                       </group>
                     );
                   })}

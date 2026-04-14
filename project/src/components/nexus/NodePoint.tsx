@@ -9,10 +9,9 @@ interface NodePointProps {
   visible: boolean;
   onNodeClick: (node: NodeData) => void;
   active: boolean;
-  showSubtitle?: boolean;
 }
 
-export default function NodePoint({ node, visible, onNodeClick, active, showSubtitle = false }: NodePointProps) {
+export default function NodePoint({ node, visible, onNodeClick, active }: NodePointProps) {
   const [hovered, setHovered] = useState(false);
   const groupRef = useRef<THREE.Group>(null);
   const currentPos = useRef(new THREE.Vector3(0, 0, 0));
@@ -81,17 +80,6 @@ export default function NodePoint({ node, visible, onNodeClick, active, showSubt
               {node.label}
             </span>
           </div>
-          {!isMobile && showSubtitle && (node.subtitle || node.period) && (
-            <div
-              className="px-2 py-0.5 rounded-full bg-black/40 border border-white/8 backdrop-blur-sm"
-            >
-              <div className="font-mono text-[9px] font-medium tracking-[0.06em] text-white/35 flex items-center justify-center gap-1.5 whitespace-nowrap">
-                {node.subtitle && <span>{node.subtitle}</span>}
-                {node.subtitle && node.period && <span className="text-white/18">|</span>}
-                {node.period && <span className="text-white/25">{node.period}</span>}
-              </div>
-            </div>
-          )}
         </div>
       </Html>
     </group>

@@ -5,3 +5,16 @@ flowchart TD
   sharedData[SharedPortfolioData] --> standardView
   sharedData --> spaceMapper[SpaceNodeMapper]
   spaceMapper --> detailSidebar[DetailSidebar]
+
+  subgraph spaceBoot[Space first load]
+    canvas[CosmosSceneUnderBootLayer]
+    boot[BootSequenceBlackOverlayNoWaveform]
+    boot --> bootFade[FadeOutOnExitComplete]
+    bootFade --> warp[SpaceContextActivateWarpZoom]
+    standby[UserDeactivateStandby] --> wave[WaveformResonanceGate]
+    wave --> userOrAuto[ClickOrAutoActivate]
+    userOrAuto --> warp
+  end
+
+  spaceView --> canvas
+  spaceView --> boot
