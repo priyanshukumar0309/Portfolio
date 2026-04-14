@@ -182,9 +182,9 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     id: "socur",
-    title: "Sovereign Curiosity (Socur)",
+    title: "Socur ",
     description:
-      "Founder — **Socur.finafa.eu** (Jan 2026–present). Digital platform at the intersection of **AI and sociology**: explore topics and map knowledge graphs. Beta: AI-enabled synthesis of interests with text/image nudges.",
+      "Founder — **Sovereign Curiosity** (Jan 2026–present). Digital platform at the intersection of **AI and sociology**: explore topics and map knowledge graphs. Beta: AI-enabled synthesis of interests with text/image nudges.",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
     technologies: ["Knowledge graphs", "AI synthesis", "Sociology × product", "Beta platform"],
     liveUrl: "https://socur.finafa.eu/",

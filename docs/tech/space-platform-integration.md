@@ -34,7 +34,7 @@ PRD: [space-platform-toggle-prd.md](../prd/space-platform-toggle-prd.md)
 - **Detail panel:** Most graph nodes show **title only** in the header; **Origin** keeps **name + owner title**. **Career / History** nodes (`id` prefix `career-`) show a **subheading of years only** (`formatCareerYearRange` from `period`). **Sub Nodes** for career parents list **child label + year range** per `career-*` child.
 - **Graph:** Under labels, a **compact chip** (`rounded-sm`, minimal **`py`**, **6px** text) shows the **year-only** string for `career-*` nodes (`NodePoint` + `src/data/careerYearRange.ts`) — avoids bulky **`rounded-full`** pills on short dates.
 - **Origin spokes:** When the active panel is the **nexus / ORIGIN** node (`activePanel.id === portfolioTree.id`), edges from center → each **L1** child (Skills, Projects, History) are **lit** (white / cool glow). None use the red path treatment until a non-origin node is selected.
-- **Selection path (red saber):** For the **active panel** (or `currentNode`) id, `NodeTree` walks **`portfolioTree`** to build the ancestor chain and marks each parent→child segment. **`NodeLine`** takes **`pathHighlight`**; when both **lit** and **`pathHighlight`**, it stacks **bloom + wide glow + thinner core** (deep red, additive) so the path reads **red**, not a bright white core. All other **lit** edges stay **white / cool glow**.
+- **Selection path (red saber):** For the **active panel** (or `currentNode`) id, `NodeTree` walks **`portfolioTree`** to build the ancestor chain and marks each parent→child segment. **`NodeLine`** takes **`pathHighlight`**; when both **lit** and **`pathHighlight`**, the selected segment itself is red-only (**glow + bloom**). If that segment was previously white-lit, only the **remaining ahead segment** stays white and shrinks from red-tip → target as red advances, then disappears at completion. Ignition starts from a visible red starter segment so the path never appears blank before rising. All other **lit** edges stay **white / cool glow**.
 
 ## Skills branch (L1 → L2 → L3)
 - **`product-management` (Skills)** expands to two **L2** groups: **Business** and **Technology**.
@@ -42,6 +42,7 @@ PRD: [space-platform-toggle-prd.md](../prd/space-platform-toggle-prd.md)
   - **Business:** Product Management (0), Platforms & scale (2), Certifications (5).
   - **Technology:** Fintech (1), Technical (3), AI (4).
 - Structure diagram: `docs/tech/skills-node-tree.mmd`.
+- **Parent panel content:** L1 nodes **Skills**, **Projects**, and **History** now carry explicit `detailPanel` narratives (technologies + three sections each) so opening these parent nodes shows meaningful context even before drilling down.
 
 ## Space backdrop (canvas + `HudFrame`)
 

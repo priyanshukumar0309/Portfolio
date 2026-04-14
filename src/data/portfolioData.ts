@@ -79,6 +79,38 @@ const DEFAULT_PORTFOLIO_TREE: NodeData = {
       position: [0, 2.2, 0],
       level: 1,
       subtitle: "Strategy & Execution",
+      detailPanel: {
+        headingName: "Skills Map",
+        technologiesHeadingIcon: "cpu",
+        technologyChipIcon: "layers",
+        technologies: [
+          "Business strategy",
+          "Technology execution",
+          "Fintech domain depth",
+          "AI + automation",
+          "Certifications",
+        ],
+        sections: [
+          {
+            key: "skills_overview",
+            title: "Overview",
+            body: "Capability graph across two tracks: Business and Technology. It combines product leadership, platform scale, and certifications with deep fintech, technical, and AI execution.",
+            headingIcon: "orbit",
+          },
+          {
+            key: "skills_business",
+            title: "Business",
+            body: "Business branch covers Product Management, Platforms & scale, and Certifications — focused on strategy, prioritization, enterprise rollout, and operating rigor.",
+            headingIcon: "layers",
+          },
+          {
+            key: "skills_technology",
+            title: "Technology",
+            body: "Technology branch covers Fintech, Technical, and AI — including payments systems, API/platform depth, and automation-first product building.",
+            headingIcon: "rocket",
+          },
+        ],
+      },
       // L2 groups consolidate six categories into Business vs Technology; L3 leaves map to `skillCategories` indices.
       children: [
         {
@@ -135,6 +167,38 @@ const DEFAULT_PORTFOLIO_TREE: NodeData = {
       position: [2.5, -1.3, 0],
       level: 1,
       subtitle: "Built & Shipped",
+      detailPanel: {
+        headingName: "Projects Portfolio",
+        technologiesHeadingIcon: "cpu",
+        technologyChipIcon: "satellite",
+        technologies: [
+          "Production platforms",
+          "AI-first products",
+          "Prototype experiments",
+          "Fintech workflows",
+          "Product-led execution",
+        ],
+        sections: [
+          {
+            key: "projects_overview",
+            title: "Overview",
+            body: "Project portfolio is split into two streams: Platforms (live / founder-led products) and Vibe Coded (rapid prototypes and demos).",
+            headingIcon: "orbit",
+          },
+          {
+            key: "projects_platforms",
+            title: "Platforms",
+            body: "Platforms include production-grade initiatives such as Finafa AI and Socur — focused on real users, real workflows, and long-term product direction.",
+            headingIcon: "factory",
+          },
+          {
+            key: "projects_prototyping",
+            title: "Prototyping",
+            body: "Vibe Coded branch captures fast validation builds like Automobile LoanHub and AI-Enabled Automation, used to test ideas, UX, and technical patterns quickly.",
+            headingIcon: "flaskConical",
+          },
+        ],
+      },
       children: [
         {
           id: "projects-platforms",
@@ -234,6 +298,38 @@ const DEFAULT_PORTFOLIO_TREE: NodeData = {
       position: [-2.5, -1.3, 0],
       level: 1,
       subtitle: "The Journey",
+      detailPanel: {
+        headingName: "Career Journey",
+        technologiesHeadingIcon: "briefcase-business",
+        technologyChipIcon: "layers",
+        technologies: [
+          "Payments & checkout",
+          "Treasury & ERP",
+          "API banking",
+          "Platform scale",
+          "AI in finance ops",
+        ],
+        sections: [
+          {
+            key: "history_overview",
+            title: "Overview",
+            body: "Career path across global payments, banking platforms, and finance systems — from API banking foundations to enterprise payments and AI-driven operations.",
+            headingIcon: "orbit",
+          },
+          {
+            key: "history_progression",
+            title: "Progression",
+            body: "Journey spans ICICI Bank, Paysafe (PM to Senior PM), and Volvo Cars, with consistent ownership of platform modernization, growth, and cross-functional delivery.",
+            headingIcon: "layers",
+          },
+          {
+            key: "history_impact",
+            title: "Impact",
+            body: "Outcomes include high-scale transaction systems, major growth and savings programs, multi-region product expansion, and automation-led finance transformation.",
+            headingIcon: "rocket",
+          },
+        ],
+      },
       children: [
         {
           id: "career-volvo",

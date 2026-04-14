@@ -1,5 +1,35 @@
 # Changelog
 
+## 2026-04-13 (L1 parent panels filled from subnode context)
+- **`portfolioData.ts`:** Added full `detailPanel` content for the previously sparse parent nodes: **Skills** (`product-management`), **Projects**, and **History** (`career-history`) with heading icons, technologies, and 3-section narrative blocks (Overview/Business/Technology, Overview/Platforms/Prototyping, Overview/Progression/Impact).
+
+## 2026-04-13 (path edges: red path + shrinking white remainder)
+- **`NodeLine`:** Selected path stays red-only (no white center under red). When transitioning from already-lit white edges, a white remainder now exists only ahead of the red tip and shrinks as red advances, then disappears at completion.
+
+## 2026-04-13 (path edges: stable red rise, no white overlay)
+- **`NodeLine`:** Removed white-overlay handoff and pulse flicker. Selected path now renders as red-only core+glow+bloom during both rise and hold, with a visible red starter segment to avoid blank ignition.
+
+## 2026-04-13 (path edges: saber shine + pulse)
+- **`NodeLine`:** Red path hold now uses a hot core plus pulsing glow/bloom (animated opacity + linewidth), giving a brighter cinematic lightsaber shimmer after overtake completes.
+
+## 2026-04-13 (path edges: shrinking white handoff)
+- **`NodeLine`:** During white→red path transition, white no longer stays full-length in parallel. White now starts at the red tip and shrinks as red advances (`red-tip -> target`), then disappears when overtake completes.
+
+## 2026-04-13 (path edges: white->red overtake transition)
+- **`NodeLine`:** Added overlay transition mode for segments that were already white-lit. White remains visible while the red path grows over it, then white hides only after red reaches full length (no white→blank→red flicker).
+
+## 2026-04-13 (path edges: no white-to-blank pop)
+- **`NodeLine`:** When a segment transitions from pre-lit white to selected red path, it now snaps to full red length first (no collapse to blank), while brand-new path segments still ignite from an origin-side red stub and rise outward.
+
+## 2026-04-13 (path edges: red ignition pass)
+- **`NodeLine`:** Path ignition no longer pops from blank/white; on path-entry it now starts as a tiny **red stub** near origin and grows outward at slower speed. During rise, path uses red glow+bloom only (no white transition color).
+
+## 2026-04-13 (path edges: cinematic saber rise)
+- **`NodeLine`:** Path-highlight edges now render as a **single red saber pass** (no center white strip), with reduced thickness and slower growth speed. Path segments reset to their start when they newly join the selected route, so the beam visibly rises outward from origin.
+
+## 2026-04-13 (path edges: slimmer pure-red saber)
+- **`NodeLine`:** Path-highlight edges hide the white core entirely (`core.visible = isLit && !onPath`) and render with a slimmer red-only stack (glow + bloom), so the saber reads clean red from origin to selected node.
+
 ## 2026-04-13 (path edges: stronger red saber)
 - **`NodeLine`:** Selection path uses a **wider deep-red glow**, **darker saturated core** (lower opacity so it doesn’t read white), plus an extra **bloom** `Line2` for additive red when line width is clamped.
 
