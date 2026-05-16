@@ -71,6 +71,8 @@ PRD: [space-platform-toggle-prd.md](../prd/space-platform-toggle-prd.md)
 - **About vs space:** The standard **About** timeline reads **`journeyItems`** in `src/data/portfolioContent.ts`. The space **Career History** graph is authored in `src/data/portfolioData.ts` (Volvo, Paysafe nested roles, ICICI, IIT). Career copy intentionally avoids `**bold**` markers so descriptions read as plain text in both surfaces.
 - **Bold markers:** Source data may still contain `**segment**` for the standard site; the **node detail sidebar** strips asterisks and uses **`font-normal`** body text only (`DetailPanel` → `stripSidebarEmphasis` / `SectionBody`).
 - **Featured projects grid:** Effects and layout keys use **`project.id`** (e.g. `finafa-eu`), not `title`, so renaming “Finafa AI” does not break Finafa-specific styling in `ProjectGrid`.
+- **Project hero images (space L3):** `featuredProjects[].image` drives the sidebar hero when a project sub-node is open — **AI-Enabled Automation** → `/AI%20platform.png`, **Socur** → `/socur.png` (assets in `public/`).
+- **Mobile detail sheet:** Drag the top handle on the bottom panel to resize between 34–90 `dvh`; preference stored under `space-detail-panel-mobile-height-vh`. `mobilePanelHeightVh` lives in `SpaceContext` so `CosmosScene` shrinks/grows the WebGL viewport in lockstep (mobile only).
 
 ## Why
 - Unifies two parallel implementations into one product experience.

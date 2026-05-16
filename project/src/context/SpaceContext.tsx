@@ -1,6 +1,11 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 import type { CosmosMode, NodeData } from '@/data/types';
 import { portfolioTree } from '@/data/portfolioData';
+import {
+  clampMobilePanelHeightVh,
+  MOBILE_PANEL_HEIGHT_STORAGE_KEY,
+  readStoredMobilePanelHeight,
+} from '@/constants/mobilePanelLayout';
 
 export interface LogEntry {
   time: string;
@@ -14,6 +19,8 @@ interface SpaceState {
   expandedNodes: Set<string>;
   activePanel: NodeData | null;
   panelCollapsed: boolean;
+  /** Mobile detail sheet height (`dvh`); cosmos viewport uses `100dvh - this` when the sheet is open. */
+  mobilePanelHeightVh: number;
   cameraTarget: [number, number, number];
   breadcrumb: string[];
   logs: LogEntry[];
@@ -27,6 +34,7 @@ interface SpaceActions {
   openPanel: (node: NodeData) => void;
   closePanel: () => void;
   setPanelCollapsed: (collapsed: boolean) => void;
+  setMobilePanelHeightVh: (vh: number) => void;
   returnToNexus: () => void;
   navigateBack: () => void;
   setCosmosMode: (mode: CosmosMode) => void;
@@ -56,6 +64,7 @@ export function SpaceProvider({ children }: { children: ReactNode }) {
     expandedNodes: new Set<string>(),
     activePanel: null,
     panelCollapsed: false,
+    mobilePanelHeightVh: readStoredMobilePanelHeight(),
     cameraTarget: [0, 0, 5],
     breadcrumb: [],
     logs: [],
@@ -151,6 +160,16 @@ export function SpaceProvider({ children }: { children: ReactNode }) {
     setState(prev => ({ ...prev, panelCollapsed: collapsed }));
   }, []);
 
+  const setMobilePanelHeightVh = useCallback((vh: number) => {
+    const next = clampMobilePanelHeightVh(vh);
+    setState(prev => ({ ...prev, mobilePanelHeightVh: next }));
+    try {
+      localStorage.setItem(MOBILE_PANEL_HEIGHT_STORAGE_KEY, String(next));
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   const returnToNexus = useCallback(() => {
     setState(prev => ({
       ...prev,
@@ -226,6 +245,7 @@ export function SpaceProvider({ children }: { children: ReactNode }) {
         openPanel,
         closePanel,
         setPanelCollapsed,
+        setMobilePanelHeightVh,
         returnToNexus,
         navigateBack,
         setCosmosMode,

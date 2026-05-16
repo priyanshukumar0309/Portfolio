@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-05-16 (Project hero images + mobile space HUD)
+- **`portfolioContent.ts`:** **AI-Enabled Automation** detail hero uses `/AI%20platform.png`; **Socur** uses `/socur.png` in the space sidebar when sub-nodes expand.
+- **`DetailPanel`:** Mobile bottom sheet has a drag handle to resize height (34–90 `dvh`, persisted in `localStorage`); cleaner “Signal bay” header and safe-area scroll padding.
+- **`CosmosScene`:** On mobile, the node canvas height tracks `mobilePanelHeightVh` from context (`calc(100dvh - HUD - sheet)`) so resizing the sheet grows or shrinks the visible space area in sync.
+- **`StatusBar`:** Mobile header is a two-row layout (controls + status, then truncated breadcrumb trail) so the top HUD no longer crowds on narrow screens.
+
 ## 2026-04-13 (L1 parent panels filled from subnode context)
 - **`portfolioData.ts`:** Added full `detailPanel` content for the previously sparse parent nodes: **Skills** (`product-management`), **Projects**, and **History** (`career-history`) with heading icons, technologies, and 3-section narrative blocks (Overview/Business/Technology, Overview/Platforms/Prototyping, Overview/Progression/Impact).
 

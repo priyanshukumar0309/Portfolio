@@ -176,7 +176,8 @@ export const featuredProjects: FeaturedProject[] = [
     title: "AI-Enabled Automation",
     description:
       "Interactive AI assistant demo for global accounting workflows and decision support.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+    // Workato hub diagram — shown in space detail panel when the sub-node is expanded.
+    image: "/AI%20platform.png",
     technologies: ["AI Agent", "Automation", "Finance Ops"],
     liveUrl: "https://ai-agent-mock.kumarpriyanshu.in/",
   },
@@ -185,7 +186,8 @@ export const featuredProjects: FeaturedProject[] = [
     title: "Socur ",
     description:
       "Founder — **Sovereign Curiosity** (Jan 2026–present). Digital platform at the intersection of **AI and sociology**: explore topics and map knowledge graphs. Beta: AI-enabled synthesis of interests with text/image nudges.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    // Sovereign Curiosity brand mark — shown in space detail panel when the sub-node is expanded.
+    image: "/socur.png",
     technologies: ["Knowledge graphs", "AI synthesis", "Sociology × product", "Beta platform"],
     liveUrl: "https://socur.finafa.eu/",
   },

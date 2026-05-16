@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ComponentType } from 'react';
+import { useState, useEffect, useRef, useCallback, type ComponentType } from 'react';
 import {
   X,
   ChevronLeft,
@@ -15,6 +15,11 @@ import { formatCareerYearRange, isCareerGraphNode } from '@/data/careerYearRange
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { getDetailPanelLucideIcon } from '@/data/detailPanelLucideRegistry';
 import type { DetailPanelIconKey } from '@/data/detailPanelIconKeys';
+import {
+  MOBILE_PANEL_HEIGHT_DEFAULT,
+  MOBILE_PANEL_HEIGHT_MAX,
+  MOBILE_PANEL_HEIGHT_MIN,
+} from '@/constants/mobilePanelLayout';
 
 const PANEL_WIDTH = 420;
 
@@ -126,10 +131,36 @@ function HudLinkButton({
 }
 
 export default function DetailPanel() {
-  const { activePanel, closePanel, addLog, isActivated, setPanelCollapsed } = useSpace();
+  const { activePanel, closePanel, addLog, isActivated, setPanelCollapsed, mobilePanelHeightVh, setMobilePanelHeightVh } =
+    useSpace();
   const [isOpen, setIsOpen] = useState(true);
   const isManuallyCollapsed = useRef(false);
+  const resizeDragStartY = useRef(0);
+  const resizeDragStartHeight = useRef(MOBILE_PANEL_HEIGHT_DEFAULT);
   const isMobile = useIsMobile();
+
+  const onMobileResizePointerDown = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
+    resizeDragStartY.current = event.clientY;
+    resizeDragStartHeight.current = mobilePanelHeightVh;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }, [mobilePanelHeightVh]);
+
+  const onMobileResizePointerMove = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.hasPointerCapture(event.pointerId)) return;
+    const deltaPx = resizeDragStartY.current - event.clientY;
+    const deltaVh = (deltaPx / window.innerHeight) * 100;
+    const next = Math.min(
+      MOBILE_PANEL_HEIGHT_MAX,
+      Math.max(MOBILE_PANEL_HEIGHT_MIN, resizeDragStartHeight.current + deltaVh),
+    );
+    setMobilePanelHeightVh(next);
+  }, []);
+
+  const onMobileResizePointerEnd = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  }, []);
 
   useEffect(() => {
     if (!activePanel) return;
@@ -180,14 +211,19 @@ export default function DetailPanel() {
   const content = activePanel ? (
     <>
       {activePanel.image && (
-        <div className="w-full overflow-hidden p-4" style={{ height: isMobile ? 180 : 240 }}>
+        <div className="w-full overflow-hidden px-4 pt-3 pb-2 sm:p-4" style={{ height: isMobile ? 200 : 240 }}>
           <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-black/30 shadow-[inset_0_0_40px_rgba(34,211,238,0.06)]">
             <ImageAccent className="pointer-events-none absolute right-3 top-3 h-4 w-4 text-cyan-300/35" aria-hidden />
-            <img src={activePanel.image} alt={activePanel.label} className="max-h-full max-w-full object-contain p-2" />
+            <img
+              src={activePanel.image}
+              alt={activePanel.label}
+              className="max-h-full max-w-full object-contain p-1 sm:p-2"
+              loading="lazy"
+            />
           </div>
         </div>
       )}
-      <div className={isMobile ? 'px-5 py-4 text-neutral-100' : 'p-8 text-neutral-100'} style={{ color: "rgb(245 245 245 / 0.95)" }}>
+      <div className={isMobile ? 'px-4 py-3 text-neutral-100' : 'p-8 text-neutral-100'} style={{ color: "rgb(245 245 245 / 0.95)" }}>
         {(sections.length > 0 || getPanelTechnologies(activePanel).length > 0 || activePanel.detailPanel || activePanel.attributes) ? (
           <div className={isMobile ? 'space-y-0' : 'space-y-0'}>
             {sections.map((section: any, index: number) => (
@@ -287,38 +323,72 @@ export default function DetailPanel() {
         </AnimatePresence>
         <AnimatePresence>
           {visible && activePanel && (
-            <motion.div className="fixed bottom-0 left-0 right-0 z-50" style={{ height: '50dvh' }} initial={{ y: '100%' }} animate={{ y: isOpen ? 0 : '100%' }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 32, stiffness: 280 }}>
-              <div
-              className="relative flex h-full w-full flex-col overflow-hidden text-neutral-100"
-              style={{
-                background: "linear-gradient(180deg, rgba(12,12,18,0.9), rgba(6,6,10,0.94))",
-                backdropFilter: "blur(28px) saturate(110%)",
-                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                color: "rgb(245 245 245 / 0.95)",
-              }}
+            <motion.div
+              className="fixed bottom-0 left-0 right-0 z-50"
+              style={{ height: `${mobilePanelHeightVh}dvh` }}
+              initial={{ y: '100%' }}
+              animate={{ y: isOpen ? 0 : '100%' }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 32, stiffness: 280 }}
             >
+              <div
+                className="relative flex h-full w-full flex-col overflow-hidden rounded-t-2xl text-neutral-100 shadow-[0_-12px_40px_rgba(0,0,0,0.45)]"
+                style={{
+                  background: 'linear-gradient(180deg, rgba(12,12,18,0.94), rgba(6,6,10,0.97))',
+                  backdropFilter: 'blur(28px) saturate(110%)',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+                  color: 'rgb(245 245 245 / 0.95)',
+                }}
+              >
                 <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(115deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0) 65%)' }} />
-                <div className="flex shrink-0 items-center justify-between border-b border-white/[0.06] px-5 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                  <div className="flex min-w-0 items-center gap-3">
-                    <button type="button" onClick={togglePanel} className={hudIconButtonClass} aria-label="Collapse panel">
+                <div
+                  role="separator"
+                  aria-label="Resize detail panel"
+                  className="relative z-10 flex shrink-0 cursor-row-resize touch-none flex-col items-center px-4 pb-1 pt-2"
+                  onPointerDown={onMobileResizePointerDown}
+                  onPointerMove={onMobileResizePointerMove}
+                  onPointerUp={onMobileResizePointerEnd}
+                  onPointerCancel={onMobileResizePointerEnd}
+                >
+                  <span className="mb-2 h-1 w-10 rounded-full bg-white/25" />
+                </div>
+                <div className="relative z-10 flex shrink-0 items-center justify-between gap-2 border-b border-white/[0.06] px-4 pb-2.5">
+                  <div className="flex min-w-0 flex-1 items-start gap-2">
+                    <button
+                      type="button"
+                      onClick={togglePanel}
+                      className={`${hudIconButtonClass} shrink-0`}
+                      aria-label="Collapse panel"
+                    >
                       <ChevronDown size={16} />
                     </button>
-                    <div className="min-w-0">
-                      <h2 className="truncate font-display text-[15px] font-semibold tracking-wide text-white">{activePanel.id === 'nexus' ? PORTFOLIO_OWNER.name : activePanel.label}</h2>
+                    <div className="min-w-0 flex-1 pr-1">
+                      <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-cyan-200/45">
+                        Signal bay
+                      </p>
+                      <h2 className="truncate font-display text-[14px] font-semibold leading-tight tracking-wide text-white">
+                        {activePanel.id === 'nexus' ? PORTFOLIO_OWNER.name : activePanel.label}
+                      </h2>
                       {activePanel.id === 'nexus' ? (
-                        <p className="truncate font-sans text-[10px] tracking-wide text-white/45">{PORTFOLIO_OWNER.title}</p>
+                        <p className="mt-0.5 truncate font-sans text-[10px] leading-snug tracking-wide text-white/45">
+                          {PORTFOLIO_OWNER.title}
+                        </p>
                       ) : (
                         careerHeaderYears && (
-                          <p className="truncate font-sans text-[9px] leading-none tracking-wide text-white/42">{careerHeaderYears}</p>
+                          <p className="mt-0.5 truncate font-sans text-[9px] leading-none tracking-wide text-white/42">
+                            {careerHeaderYears}
+                          </p>
                         )
                       )}
                     </div>
                   </div>
-                  <button type="button" onClick={handleClose} className={hudIconButtonClass} aria-label="Close panel">
+                  <button type="button" onClick={handleClose} className={`${hudIconButtonClass} shrink-0`} aria-label="Close panel">
                     <X size={16} />
                   </button>
                 </div>
-                <div className="min-h-0 flex-1 overflow-y-auto">{content}</div>
+                <div className="relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+                  {content}
+                </div>
               </div>
             </motion.div>
           )}

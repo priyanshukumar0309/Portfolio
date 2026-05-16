@@ -5,10 +5,34 @@ import CameraController from './CameraController';
 import { useSpace } from '@/context/SpaceContext';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
+/** Approximate mobile `StatusBar` stack height so nodes sit in the band between HUD and the detail sheet. */
+const MOBILE_TOP_HUD_OFFSET = '4.75rem';
+
 export default function CosmosScene({ children }: { children?: React.ReactNode }) {
-  const { activePanel, panelCollapsed } = useSpace();
+  const { activePanel, panelCollapsed, mobilePanelHeightVh } = useSpace();
   const isMobile = useIsMobile();
-  const canvasHeight = isMobile && activePanel && !panelCollapsed ? '50dvh' : '100%';
+
+  // Mobile: node canvas fills only the strip above the bottom sheet; desktop stays full viewport.
+  const mobileSheetOpen = isMobile && activePanel && !panelCollapsed;
+  const canvasStyle: React.CSSProperties = mobileSheetOpen
+    ? {
+        position: 'fixed',
+        top: MOBILE_TOP_HUD_OFFSET,
+        left: 0,
+        width: '100%',
+        height: `calc(100dvh - ${MOBILE_TOP_HUD_OFFSET} - ${mobilePanelHeightVh}dvh)`,
+        background: '#020408',
+        touchAction: 'none',
+      }
+    : {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: '#020408',
+        touchAction: 'none',
+      };
 
   return (
     <Canvas
@@ -19,15 +43,7 @@ export default function CosmosScene({ children }: { children?: React.ReactNode }
         gl.setClearColor('#020408', 1);
         gl.outputColorSpace = THREE.SRGBColorSpace;
       }}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: canvasHeight,
-        background: '#020408',
-        touchAction: 'none',
-      }}
+      style={canvasStyle}
       gl={{ antialias: true, alpha: false }}
     >
       <CameraController />
